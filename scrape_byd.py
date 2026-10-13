@@ -18,6 +18,7 @@ import pathlib
 import re
 import sys
 import urllib.request
+from zoneinfo import ZoneInfo
 
 URL = "https://bydautomotive.com.au/find-us"
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
@@ -83,10 +84,11 @@ def build_snapshot(raw: list[dict]) -> dict:
     for x in raw:
         all_types[x.get("pinType") or "?"] = all_types.get(x.get("pinType") or "?", 0) + 1
     now = dt.datetime.now(dt.timezone.utc)
+    syd = now.astimezone(ZoneInfo("Australia/Sydney"))   # 自动区分 AEST / AEDT
     return {
         "source": URL,
         "fetched_at_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "fetched_at_aest": (now + dt.timedelta(hours=10)).strftime("%Y-%m-%d %H:%M AEST"),
+        "fetched_at_aest": syd.strftime("%Y-%m-%d %H:%M ") + syd.tzname(),
         "count": len(sales),
         "by_state": by_state,
         "by_badge": by_badge,

@@ -2,8 +2,9 @@ name: Refresh BYD store data
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
-  workflow_dispatch:
+    # 每 30 分钟一次，避开整点/半点（GitHub 在 :00 和 :30 负载最高，常延迟或跳过）
+    - cron: "7,37 * * * *"
+  workflow_dispatch:        # 也可在 Actions 页面手动触发
 
 permissions:
   contents: write

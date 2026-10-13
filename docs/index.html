@@ -200,8 +200,8 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
   let data,history,geo;
   try{
     [data,history,geo]=await Promise.all([
-      fetch("data/locations.json").then(r=>r.json()),
-      fetch("data/history.json").then(r=>r.json()).catch(()=>[]),
+      fetch("data/locations.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()),
+      fetch("data/history.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).catch(()=>[]),
       REAL?Promise.resolve(null):fetch("data/au_states.json").then(r=>r.json())
     ]);
   }catch(e){ $("#sub").textContent="数据文件读取失败："+e.message; return; }
