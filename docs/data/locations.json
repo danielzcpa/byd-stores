@@ -1,9 +1,20 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-10-13T06:13:32Z",
- "fetched_at_aest": "2026-10-13 17:13 AEDT",
- "count": 130,
+ "fetched_at_utc": "2026-10-13T06:16:13Z",
+ "fetched_at_aest": "2026-10-13 17:16 AEDT",
+ "count": 122,
+ "count_all": 130,
  "by_state": {
+  "NSW": 42,
+  "VIC": 32,
+  "QLD": 22,
+  "WA": 11,
+  "SA": 9,
+  "TAS": 3,
+  "ACT": 2,
+  "NT": 1
+ },
+ "by_state_all": {
   "NSW": 43,
   "VIC": 36,
   "QLD": 23,
