@@ -96,7 +96,9 @@ svg.map{display:block;width:100%;height:auto;max-width:100%}
 .poa-tip{font:12px var(--display)}
 .mapnote{position:absolute;left:16px;bottom:16px;z-index:400;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:5px 9px;font-size:12px;color:var(--muted);max-width:70%}
 
-.list{max-height:620px;overflow:auto}
+.list{max-height:640px;overflow:auto}
+.panel.mappanel{display:flex;flex-direction:column}
+.panel.mappanel .mapwrap{flex:1}
 .row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:4px 10px;padding:9px 14px;border-bottom:1px solid var(--line);cursor:pointer;align-items:start}
 .row:hover,.row.hl{background:var(--accent-soft)}
 .row .stc{font-size:11px;font-weight:700;color:var(--muted);padding-top:3px}
@@ -144,7 +146,7 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
 <div class="states" id="states"></div>
 
 <section class="main">
-  <div class="panel">
+  <div class="panel mappanel">
     <div class="panel-h">
       <h2 id="mapTitle">全国分布</h2>
       <div class="tools">
@@ -184,10 +186,6 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
   </div>
 </section>
 
-<p class="foot" id="foot">
-  数据直接取自 BYD 官网 <a href="https://bydautomotive.com.au/find-us" target="_blank" rel="noopener">Find Us</a> 页面内嵌的门店数组（<code>LocationsArr</code>，类型 <code>pickup</code>），不含服务中心、保修点和钣喷修理厂。
-  每次抓取与上一次快照按门店 ID 比对，新增、关闭、改名均记入变动记录。坐标为官网自带坐标。
-</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
@@ -237,10 +235,14 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
 
   if(REAL){
     // ================= Leaflet 真实地图 =================
-    $("#map").hidden=true; $("#lmap").hidden=false; $("#poaBtn").hidden=false;
+    $("#map").setAttribute("hidden",""); $("#map").style.display="none"; $("#lmap").hidden=false; $("#poaBtn").hidden=false;
     $("#legendHint").textContent="点击州名可定位；点击圆点查看门店；开启「邮编区域」后放大可见邮编边界与编号";
-    const map=L.map("lmap",{zoomControl:true,preferCanvas:true,worldCopyJump:false}).setView([-28.5,134.5],4);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+    const AU=L.latLngBounds([-44.3,112.5],[-9.8,154.5]);
+    const map=L.map("lmap",{zoomControl:true,preferCanvas:true,worldCopyJump:false,zoomSnap:0.25,zoomDelta:0.5,maxBounds:AU.pad(0.25),maxBoundsViscosity:1.0});
+    const fitAU=()=>{map.invalidateSize(); map.fitBounds(AU,{padding:[6,6]}); map.setMinZoom(map.getZoom());};
+    fitAU();
+    let rt; window.addEventListener("resize",()=>{clearTimeout(rt); rt=setTimeout(()=>{const atMin=map.getZoom()<=map.getMinZoom()+0.01; map.invalidateSize(); if(atMin) fitAU();},150)});
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,noWrap:true,bounds:AU.pad(0.6),attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
     const note=document.createElement("div"); note.className="mapnote"; note.hidden=true; $("#lmap").appendChild(note);
 
     const markers=new Map(); const pinGroup=L.layerGroup().addTo(map);
@@ -290,13 +292,13 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
 
     const stateBounds={}; locs.forEach(l=>{if(!l.lat||!l.lng)return;(stateBounds[l.state]||(stateBounds[l.state]=[])).push([l.lat,l.lng])});
     mapApi={
-      zoomTo(s){ if(!s){map.flyTo([-28.5,134.5],4,{duration:.6});return} const pts=stateBounds[s]; if(!pts||!pts.length) return; if(pts.length===1){map.flyTo(pts[0],11,{duration:.6});return} map.flyToBounds(L.latLngBounds(pts).pad(.15),{duration:.6,maxZoom:11}); },
+      zoomTo(s){ if(!s){map.flyToBounds(AU,{padding:[6,6],duration:.6});return} const pts=stateBounds[s]; if(!pts||!pts.length) return; if(pts.length===1){map.flyTo(pts[0],11,{duration:.6});return} map.flyToBounds(L.latLngBounds(pts).pad(.15),{duration:.6,maxZoom:11}); },
       setVisible(ids){ markers.forEach((m,id)=>{const on=ids.has(id); m.setStyle({fillOpacity:on?.95:.12,opacity:on?1:.2}); if(on) m.bringToFront()}); },
       focus(id){ markers.forEach((m,i)=>{const l=locs.find(x=>x.id===i); m.setStyle({fillColor:i===id?"#b3402f":(isSoon(l.badge)?"#b07a1c":"#1f6b4a"),radius:i===id?8:6})}); const m=markers.get(id); if(!m) return; if(map.getZoom()<12) map.flyTo(m.getLatLng(),13,{duration:.7}); else map.panTo(m.getLatLng()); setTimeout(()=>m.openPopup(),750); },
       clearFocus(){ markers.forEach((m,i)=>{const l=locs.find(x=>x.id===i); m.setStyle({fillColor:isSoon(l.badge)?"#b07a1c":"#1f6b4a",radius:6})}); map.closePopup(); }
     };
-    // 地图容器尺寸在布局完成后再校准一次
-    setTimeout(()=>map.invalidateSize(),300);
+    // 字体/布局就绪后再校准一次容器尺寸并重新适配澳洲
+    setTimeout(fitAU,300); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>setTimeout(fitAU,50));
   } else {
     // ================= SVG 示意图（无外部底图时） =================
     const W=800,H=700,PAD=14;
@@ -471,7 +473,6 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
     t.innerHTML=s;
   })();
 
-  if(REAL) $("#foot").insertAdjacentHTML("beforeend",' 底图：OpenStreetMap；邮编区域：ABS ASGS Edition 3 Postal Areas (POA) 2021，已简化以便网页显示。');
 })();
 </script>
 
