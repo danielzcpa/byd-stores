@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>BYD 澳洲门店监控</title>
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin=""></script>
+<script>window.REAL_MAP=true</script>
+</head>
+<body>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* 布局：顶部状态条 → 分州计数 → 地图 + 门店列表 → 变动记录与趋势 */
+:root{
+  --bg:#f6f5f0; --panel:#ffffff; --fg:#1d221e; --muted:#6a7268; --line:#dcdcd2;
+  --accent:#1f6b4a; --accent-soft:#dcebe1; --accent-ink:#0f3e2b;
+  --pos:#1f6b4a; --neg:#b3402f; --warn:#b07a1c; --warn-soft:#f3e7cf;
+  --display:"Manrope","PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --map-fill:#e9eae0; --map-stroke:#c9cbbb; --map-hot:#bcd6c6;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141714; --panel:#1c201c; --fg:#e8eae3; --muted:#9aa396; --line:#2d332d;
+  --accent:#5fb98a; --accent-soft:#1f3a2d; --accent-ink:#cfeedd;
+  --pos:#5fb98a; --neg:#e07a68; --warn:#d9a94a; --warn-soft:#3a2f17;
+  --map-fill:#232823; --map-stroke:#3a423a; --map-hot:#2c4a39; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141714; --panel:#1c201c; --fg:#e8eae3; --muted:#9aa396; --line:#2d332d;
+  --accent:#5fb98a; --accent-soft:#1f3a2d; --accent-ink:#cfeedd;
+  --pos:#5fb98a; --neg:#e07a68; --warn:#d9a94a; --warn-soft:#3a2f17;
+  --map-fill:#232823; --map-stroke:#3a423a; --map-hot:#2c4a39; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:14px;line-height:1.5;padding-block:0 32px;padding-inline:16px;max-width:1240px;margin:0 auto}
+h1,h2,h3{margin:0;text-wrap:balance;font-weight:700}
+a{color:var(--accent)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding-block:22px 16px;border-bottom:1px solid var(--line)}
+header h1{font-size:22px;letter-spacing:-.01em}
+header .sub{color:var(--muted);margin-top:4px}
+.total{display:flex;align-items:baseline;gap:10px}
+.total .big{font-size:44px;font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--accent)}
+.total .delta{font-size:13px;font-weight:600}
+.delta.pos{color:var(--pos)} .delta.neg{color:var(--neg)} .delta.flat{color:var(--muted)}
+
+.states{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;margin-top:16px}
+@media (max-width:900px){.states{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.state{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:border-color .15s}
+.state:hover{border-color:var(--accent)}
+.state[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.state .k{font-size:12px;font-weight:700;color:var(--muted)}
+.state .v{font-size:24px;font-weight:800;line-height:1.1;margin-top:2px}
+.state .d{font-size:11px;margin-top:2px;min-height:1.2em}
+.state:focus-visible,.pin:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.main{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;margin-top:16px}
+@media (max-width:900px){.main{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;min-width:0}
+.panel-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.panel-h h2{font-size:14px}
+.tools{display:flex;flex-wrap:wrap;gap:6px}
+.tools input,.tools select,.tools button{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:5px;padding:5px 8px}
+.tools button{cursor:pointer}
+.tools button:hover{border-color:var(--accent)}
+.tools button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-ink)}
+
+.mapwrap{position:relative;padding:8px}
+svg.map{display:block;width:100%;height:auto;max-width:100%}
+.st{fill:var(--map-fill);stroke:var(--map-stroke);stroke-width:.6;cursor:pointer;transition:fill .15s}
+.st:hover,.st.active{fill:var(--map-hot)}
+.pin{fill:var(--accent);stroke:var(--panel);stroke-width:.9;cursor:pointer;opacity:.92}
+.pin.soon{fill:var(--warn)}
+.pin.hl{fill:var(--neg);r:4.2}
+.pin.dim{opacity:.18}
+.tip{position:absolute;pointer-events:none;background:var(--fg);color:var(--bg);font-size:12px;padding:6px 8px;border-radius:4px;max-width:260px;transform:translate(-50%,calc(-100% - 10px));white-space:nowrap;z-index:5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;padding:4px 14px 12px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-right:5px;vertical-align:middle}
+.legend i.soon{background:var(--warn)}
+.legend i.poa{width:12px;height:8px;border-radius:2px;background:transparent;border:1.5px solid var(--neg);opacity:.8}
+
+/* 真实地图（Leaflet） */
+#lmap{height:640px;border-radius:4px;background:var(--map-fill);z-index:0}
+@media (max-width:900px){#lmap{height:440px}}
+.leaflet-container{font-family:var(--display);font-size:12px}
+.leaflet-popup-content{margin:10px 14px;line-height:1.45;color:#1d221e}
+.leaflet-popup-content b{font-size:13px}
+.leaflet-popup-content .muted{color:#6a7268}
+.poa-label{background:transparent;border:0;box-shadow:none;font:600 11px var(--mono);color:#8a3a2c;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff;pointer-events:none;white-space:nowrap}
+.poa-label.has{color:#0f3e2b;font-weight:700}
+.poa-tip{font:12px var(--display)}
+.mapnote{position:absolute;left:16px;bottom:16px;z-index:400;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:5px 9px;font-size:12px;color:var(--muted);max-width:70%}
+
+.list{max-height:620px;overflow:auto}
+.row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:4px 10px;padding:9px 14px;border-bottom:1px solid var(--line);cursor:pointer;align-items:start}
+.row:hover,.row.hl{background:var(--accent-soft)}
+.row .stc{font-size:11px;font-weight:700;color:var(--muted);padding-top:3px}
+.row .nm{font-weight:700}
+.row .ad{color:var(--muted);font-size:12px;overflow-wrap:anywhere}
+.row .badge{font-size:11px;padding:2px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);white-space:nowrap;font-weight:600}
+.row .badge.soon{background:var(--warn-soft);color:var(--warn)}
+.row .ph{color:var(--muted);font-size:12px}
+.empty{padding:28px 14px;color:var(--muted);text-align:center}
+
+.bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px}
+@media (max-width:900px){.bottom{grid-template-columns:1fr}}
+.log{max-height:360px;overflow:auto}
+.logrow{padding:9px 14px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px}
+.logrow .d{color:var(--muted);font-size:12px;padding-top:2px}
+.logrow .c{font-size:13px}
+.chg{display:block;margin-top:2px}
+.chg.add{color:var(--pos)} .chg.rem{color:var(--neg)} .chg.ren{color:var(--warn)}
+svg.trend{display:block;width:100%;height:auto;max-width:100%}
+.trend text{fill:var(--muted);font-family:var(--mono);font-size:9px}
+.trend .ax{stroke:var(--line)}
+.trend .ln{stroke:var(--accent);fill:none;stroke-width:1.6}
+.trend .ar{fill:var(--accent);opacity:.12}
+.trend .pt{fill:var(--accent)}
+.foot{margin-top:18px;color:var(--muted);font-size:12px;line-height:1.7}
+.foot code{font-family:var(--mono);font-size:11px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:0 4px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header>
+  <div>
+    <div class="eyebrow">BYD Australia · 销售网点（Experience Centre 类）</div>
+    <h1>BYD 澳洲门店监控</h1>
+    <div class="sub" id="sub">正在读取数据…</div>
+  </div>
+  <div class="total">
+    <span class="big num" id="total">—</span>
+    <span>
+      <div class="eyebrow">家销售点</div>
+      <div class="delta flat" id="totalDelta"></div>
+    </span>
+  </div>
+</header>
+
+<div class="states" id="states"></div>
+
+<section class="main">
+  <div class="panel">
+    <div class="panel-h">
+      <h2 id="mapTitle">全国分布</h2>
+      <div class="tools">
+        <button type="button" id="poaBtn" aria-pressed="false" hidden title="显示 ABS 2021 邮编区域（POA）边界，放大后显示邮编号">邮编区域</button>
+        <button type="button" id="resetMap">显示全国</button>
+      </div>
+    </div>
+    <div class="mapwrap">
+      <svg class="map" id="map" viewBox="0 0 800 700" role="img" aria-label="BYD 澳洲销售点地图"></svg>
+      <div id="lmap" hidden></div>
+      <div class="tip" id="tip" hidden></div>
+    </div>
+    <div class="legend" id="legend"><span><i></i>营业中</span><span><i class="soon"></i>即将开业 / 快闪店</span><span id="legendHint">点击州名或色块可放大；点击圆点查看门店</span></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-h">
+      <h2>门店列表 <span class="num" id="listCount" style="color:var(--muted);font-weight:600"></span></h2>
+      <div class="tools">
+        <input type="search" id="q" placeholder="搜索门店 / 城市 / 邮编" aria-label="搜索">
+        <select id="badgeSel" aria-label="类型筛选"><option value="">全部类型</option></select>
+        <button type="button" id="exportXlsx" title="导出当前筛选结果、分州汇总和变动记录">导出 Excel</button>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </div>
+</section>
+
+<section class="bottom">
+  <div class="panel">
+    <div class="panel-h"><h2>变动记录</h2><span class="eyebrow" id="logNote"></span></div>
+    <div class="log" id="log"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-h"><h2>门店总数趋势</h2><span class="eyebrow">每日快照</span></div>
+    <div style="padding:10px 14px 14px"><svg class="trend" id="trend" viewBox="0 0 520 180" role="img" aria-label="门店总数趋势"></svg></div>
+  </div>
+</section>
+
+<p class="foot" id="foot">
+  数据直接取自 BYD 官网 <a href="https://bydautomotive.com.au/find-us" target="_blank" rel="noopener">Find Us</a> 页面内嵌的门店数组（<code>LocationsArr</code>，类型 <code>pickup</code>），不含服务中心、保修点和钣喷修理厂。
+  每次抓取与上一次快照按门店 ID 比对，新增、关闭、改名均记入变动记录。坐标为官网自带坐标。
+</p>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(async function(){
+  const $=s=>document.querySelector(s);
+  const STATES=["NSW","VIC","QLD","WA","SA","TAS","ACT","NT"];
+  const STATE_NAME={"New South Wales":"NSW","Victoria":"VIC","Queensland":"QLD","South Australia":"SA","Western Australia":"WA","Tasmania":"TAS","Northern Territory":"NT","Australian Capital Territory":"ACT"};
+  const CN={NSW:"新州",VIC:"维州",QLD:"昆州",WA:"西澳",SA:"南澳",TAS:"塔州",ACT:"首都领地",NT:"北领地"};
+  const isSoon=b=>/soon|pop-?up/i.test(b||"");
+  const REAL=!!(window.REAL_MAP&&window.L);   // 独立部署版加载 Leaflet，使用真实街道底图
+
+  let data,history,geo;
+  try{
+    [data,history,geo]=await Promise.all([
+      fetch("data/locations.json").then(r=>r.json()),
+      fetch("data/history.json").then(r=>r.json()).catch(()=>[]),
+      REAL?Promise.resolve(null):fetch("data/au_states.json").then(r=>r.json())
+    ]);
+  }catch(e){ $("#sub").textContent="数据文件读取失败："+e.message; return; }
+
+  const locs=data.locations;
+  const prev=history.length>=2?history[history.length-2]:null;
+  const last=history[history.length-1]||null;
+  const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+  // ---- 顶部 ----
+  $("#sub").textContent=`数据抓取时间 ${data.fetched_at_aest} · 官网全部点位 ${Object.values(data.all_pin_types||{}).reduce((a,b)=>a+b,0)} 个，其中销售点 ${data.count} 家`;
+  $("#total").textContent=data.count;
+  const td=$("#totalDelta");
+  if(prev){const d=data.count-prev.count; td.textContent=(d>0?"+":"")+d+" 较 "+prev.date; td.className="delta "+(d>0?"pos":d<0?"neg":"flat");}
+  else td.textContent="首次快照";
+
+  // ---- 分州 ----
+  let activeState=null, activeBadge="", query="", hl=null;
+  const stWrap=$("#states");
+  STATES.forEach(s=>{
+    const b=document.createElement("button"); b.type="button"; b.className="state"; b.id="st-"+s; b.setAttribute("aria-pressed","false");
+    const n=data.by_state[s]||0; const d=prev?(n-(prev.by_state[s]||0)):0;
+    b.innerHTML=`<div class="k">${s} <span style="font-weight:500">${CN[s]}</span></div><div class="v num">${n}</div><div class="d num ${d>0?"delta pos":d<0?"delta neg":"delta flat"}">${prev?(d===0?"持平":(d>0?"+":"")+d):""}</div>`;
+    b.addEventListener("click",()=>setState(activeState===s?null:s));
+    stWrap.appendChild(b);
+  });
+
+  // 地图接口：两种实现（真实底图 / 示意图）都实现 zoomTo(state)、setVisible(ids)、focus(id)
+  let mapApi;
+  const byPostcode={}; locs.forEach(l=>{const k=String(l.postcode||"").padStart(4,"0"); (byPostcode[k]||(byPostcode[k]=[])).push(l)});
+
+  if(REAL){
+    // ================= Leaflet 真实地图 =================
+    $("#map").hidden=true; $("#lmap").hidden=false; $("#poaBtn").hidden=false;
+    $("#legendHint").textContent="点击州名可定位；点击圆点查看门店；开启「邮编区域」后放大可见邮编边界与编号";
+    const map=L.map("lmap",{zoomControl:true,preferCanvas:true,worldCopyJump:false}).setView([-28.5,134.5],4);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+    const note=document.createElement("div"); note.className="mapnote"; note.hidden=true; $("#lmap").appendChild(note);
+
+    const markers=new Map(); const pinGroup=L.layerGroup().addTo(map);
+    const style=l=>({radius:6,color:"#ffffff",weight:1.2,fillColor:isSoon(l.badge)?"#b07a1c":"#1f6b4a",fillOpacity:.95});
+    locs.forEach(l=>{
+      if(!l.lat||!l.lng) return;
+      const m=L.circleMarker([l.lat,l.lng],style(l)).addTo(pinGroup);
+      const pc=String(l.postcode||"").padStart(4,"0"); const same=(byPostcode[pc]||[]).length;
+      m.bindPopup(`<b>${esc(l.name)}</b><br>${esc(l.address)}<br>${esc(l.city)} ${l.state} <b>${esc(pc)}</b>${same>1?`<span class="muted">（该邮编共 ${same} 家）</span>`:""}<br><span class="muted">经纬度 ${Number(l.lat).toFixed(5)}, ${Number(l.lng).toFixed(5)}</span>${l.phone?`<br><span class="muted">${esc(l.phone)}</span>`:""}${l.badge&&l.badge!=="Experience Centre"?`<br><span class="muted">${esc(l.badge)}</span>`:""}${l.website?`<br><a href="${esc(l.website)}" target="_blank" rel="noopener">${esc(l.website.replace(/^https?:\/\//,""))}</a>`:""}`);
+      m.bindTooltip(l.name,{direction:"top",offset:[0,-6],className:"poa-tip"});
+      m.on("click",()=>highlight(l.id));
+      markers.set(l.id,m);
+    });
+
+    // 邮编区域（ABS POA 2021，按需加载）
+    let poaLayer=null, poaLoaded=null, poaOn=false; const labels=L.layerGroup();
+    const poaStyle=f=>{const has=!!byPostcode[f.properties.p]; return {color:has?"#1f6b4a":"#b3402f",weight:has?1.6:0.9,opacity:has?.9:.55,fillColor:has?"#1f6b4a":"#b3402f",fillOpacity:has?.10:.03}};
+    async function loadPoa(){
+      if(poaLoaded) return poaLoaded;
+      note.hidden=false; note.textContent="正在加载邮编边界（约 0.8 MB）…";
+      poaLoaded=fetch("data/poa.json").then(r=>r.json()).then(g=>{
+        poaLayer=L.geoJSON(g,{style:poaStyle,onEachFeature:(f,ly)=>{
+          const n=(byPostcode[f.properties.p]||[]).length;
+          ly.bindTooltip(`邮编 ${f.properties.p}${n?` · ${n} 家门店：${byPostcode[f.properties.p].map(x=>x.name).join("、")}`:" · 无门店"}`,{sticky:true,className:"poa-tip"});
+          ly.on("click",()=>{if(n){highlight(byPostcode[f.properties.p][0].id)}});
+        }});
+        note.hidden=true; return poaLayer;
+      }).catch(e=>{note.textContent="邮编边界加载失败："+e.message; poaLoaded=null; throw e});
+      return poaLoaded;
+    }
+    function refreshLabels(){
+      labels.clearLayers(); if(!poaOn||!poaLayer) return;
+      const z=map.getZoom(); if(z<11) return;
+      const b=map.getBounds();
+      poaLayer.eachLayer(ly=>{
+        const lb=ly.getBounds(); if(!b.intersects(lb)) return;
+        const c=lb.getCenter(); const n=(byPostcode[ly.feature.properties.p]||[]).length;
+        L.marker(c,{icon:L.divIcon({className:"poa-label"+(n?" has":""),html:ly.feature.properties.p+(n?` (${n})`:""),iconSize:null}),interactive:false}).addTo(labels);
+      });
+    }
+    $("#poaBtn").addEventListener("click",async()=>{
+      poaOn=!poaOn; $("#poaBtn").setAttribute("aria-pressed",String(poaOn));
+      if(poaOn){ try{ const ly=await loadPoa(); ly.addTo(map); labels.addTo(map); ly.bringToBack(); refreshLabels(); if(map.getZoom()<9){note.hidden=false;note.textContent="已开启邮编区域：放大到城市级别可见边界，放大到 11 级以上显示邮编号；绿色为有门店的邮编。";setTimeout(()=>note.hidden=true,6000)} }catch(e){ poaOn=false; $("#poaBtn").setAttribute("aria-pressed","false"); } }
+      else{ if(poaLayer) map.removeLayer(poaLayer); map.removeLayer(labels); note.hidden=true; }
+    });
+    map.on("moveend zoomend",refreshLabels);
+
+    const stateBounds={}; locs.forEach(l=>{if(!l.lat||!l.lng)return;(stateBounds[l.state]||(stateBounds[l.state]=[])).push([l.lat,l.lng])});
+    mapApi={
+      zoomTo(s){ if(!s){map.flyTo([-28.5,134.5],4,{duration:.6});return} const pts=stateBounds[s]; if(!pts||!pts.length) return; if(pts.length===1){map.flyTo(pts[0],11,{duration:.6});return} map.flyToBounds(L.latLngBounds(pts).pad(.15),{duration:.6,maxZoom:11}); },
+      setVisible(ids){ markers.forEach((m,id)=>{const on=ids.has(id); m.setStyle({fillOpacity:on?.95:.12,opacity:on?1:.2}); if(on) m.bringToFront()}); },
+      focus(id){ markers.forEach((m,i)=>{const l=locs.find(x=>x.id===i); m.setStyle({fillColor:i===id?"#b3402f":(isSoon(l.badge)?"#b07a1c":"#1f6b4a"),radius:i===id?8:6})}); const m=markers.get(id); if(!m) return; if(map.getZoom()<12) map.flyTo(m.getLatLng(),13,{duration:.7}); else map.panTo(m.getLatLng()); setTimeout(()=>m.openPopup(),750); },
+      clearFocus(){ markers.forEach((m,i)=>{const l=locs.find(x=>x.id===i); m.setStyle({fillColor:isSoon(l.badge)?"#b07a1c":"#1f6b4a",radius:6})}); map.closePopup(); }
+    };
+    // 地图容器尺寸在布局完成后再校准一次
+    setTimeout(()=>map.invalidateSize(),300);
+  } else {
+    // ================= SVG 示意图（无外部底图时） =================
+    const W=800,H=700,PAD=14;
+    let bbox=[1e9,1e9,-1e9,-1e9];
+    const eachCoord=(c,f)=>Array.isArray(c[0])?c.forEach(x=>eachCoord(x,f)):f(c);
+    geo.features.forEach(ft=>eachCoord(ft.geometry.coordinates,([x,y])=>{bbox=[Math.min(bbox[0],x),Math.min(bbox[1],y),Math.max(bbox[2],x),Math.max(bbox[3],y)]}));
+    const midLat=(bbox[1]+bbox[3])/2, k=Math.cos(midLat*Math.PI/180);
+    const sx=(W-2*PAD)/((bbox[2]-bbox[0])*k), sy=(H-2*PAD)/(bbox[3]-bbox[1]), sc=Math.min(sx,sy);
+    const ox=(W-(bbox[2]-bbox[0])*k*sc)/2, oy=(H-(bbox[3]-bbox[1])*sc)/2;
+    const P=(lng,lat)=>[ox+(lng-bbox[0])*k*sc, oy+(bbox[3]-lat)*sc];
+    const ring=r=>r.map(([x,y],i)=>(i?"L":"M")+P(x,y).map(v=>v.toFixed(1)).join(" ")).join("")+"Z";
+    const pathOf=g=>g.type==="Polygon"?g.coordinates.map(ring).join(""):g.coordinates.map(pg=>pg.map(ring).join("")).join("");
+    const svg=$("#map"); const NS="http://www.w3.org/2000/svg";
+    const gS=document.createElementNS(NS,"g"), gP=document.createElementNS(NS,"g"), gL=document.createElementNS(NS,"g");
+    svg.append(gS,gP,gL);
+    const stateBox={};
+    geo.features.forEach(ft=>{
+      const code=STATE_NAME[ft.properties.STATE_NAME]; if(!code) return;
+      const p=document.createElementNS(NS,"path"); p.setAttribute("d",pathOf(ft.geometry)); p.setAttribute("class","st"); p.dataset.state=code;
+      p.addEventListener("click",()=>setState(activeState===code?null:code));
+      gS.appendChild(p);
+      let bb=[1e9,1e9,-1e9,-1e9];
+      eachCoord(ft.geometry.coordinates,([x,y])=>{const [px,py]=P(x,y);bb=[Math.min(bb[0],px),Math.min(bb[1],py),Math.max(bb[2],px),Math.max(bb[3],py)]});
+      stateBox[code]=bb;
+    });
+    const pinBox={};
+    locs.forEach(l=>{if(!l.lat||!l.lng)return;const [x,y]=P(l.lng,l.lat);const b=pinBox[l.state]||(pinBox[l.state]=[1e9,1e9,-1e9,-1e9]);pinBox[l.state]=[Math.min(b[0],x),Math.min(b[1],y),Math.max(b[2],x),Math.max(b[3],y)]});
+    const tip=$("#tip"); const pinEls=new Map();
+    locs.forEach(l=>{
+      if(!l.lat||!l.lng) return;
+      const [x,y]=P(l.lng,l.lat);
+      const c=document.createElementNS(NS,"circle"); c.setAttribute("cx",x.toFixed(1)); c.setAttribute("cy",y.toFixed(1)); c.setAttribute("r","3.2");
+      c.setAttribute("class","pin"+(isSoon(l.badge)?" soon":"")); c.setAttribute("tabindex","0");
+      const showTip=e=>{const r=svg.getBoundingClientRect(); tip.innerHTML=`<b>${esc(l.name)}</b><br>${esc(l.address)} ${esc(l.city)} ${l.state} ${esc(String(l.postcode).padStart(4,"0"))}<br>经纬度 ${Number(l.lat).toFixed(5)}, ${Number(l.lng).toFixed(5)}${l.badge&&l.badge!=="Experience Centre"?"<br>"+esc(l.badge):""}`; tip.hidden=false; tip.style.left=(e.clientX-r.left)+"px"; tip.style.top=(e.clientY-r.top)+"px";};
+      c.addEventListener("mouseenter",showTip); c.addEventListener("mousemove",showTip); c.addEventListener("mouseleave",()=>tip.hidden=true);
+      c.addEventListener("click",()=>highlight(l.id));
+      c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();highlight(l.id)}});
+      gP.appendChild(c); pinEls.set(l.id,c);
+    });
+    Object.entries(stateBox).forEach(([code,b])=>{
+      if(code==="ACT") return;
+      const t=document.createElementNS(NS,"text"); t.setAttribute("x",((b[0]+b[2])/2).toFixed(0)); t.setAttribute("y",((b[1]+b[3])/2).toFixed(0));
+      t.setAttribute("text-anchor","middle"); t.setAttribute("style","font:700 13px var(--display);fill:var(--muted);pointer-events:none"); t.textContent=code; gL.appendChild(t);
+    });
+    mapApi={
+      zoomTo(code){
+        gS.querySelectorAll(".st").forEach(p=>p.classList.toggle("active",p.dataset.state===code));
+        if(!code){svg.setAttribute("viewBox",`0 0 ${W} ${H}`);return}
+        const b=pinBox[code]||stateBox[code]; const w=Math.max(b[2]-b[0],40), h=Math.max(b[3]-b[1],40);
+        const m=Math.max(w,h)*0.35+20; const vw=w+2*m, vh=h+2*m; const ratio=W/H; let fw=vw,fh=vh; if(fw/fh>ratio) fh=fw/ratio; else fw=fh*ratio;
+        svg.setAttribute("viewBox",`${(b[0]+b[2])/2-fw/2} ${(b[1]+b[3])/2-fh/2} ${fw} ${fh}`);
+      },
+      setVisible(ids){ pinEls.forEach((c,id)=>c.classList.toggle("dim",!ids.has(id))); },
+      focus(id){ pinEls.forEach((c,i)=>c.classList.toggle("hl",i===id)); },
+      clearFocus(){ pinEls.forEach(c=>c.classList.remove("hl")); }
+    };
+  }
+  $("#resetMap").addEventListener("click",()=>setState(null));
+
+  // ---- 列表 ----
+  const badgeSel=$("#badgeSel");
+  Object.entries(data.by_badge).sort((a,b)=>b[1]-a[1]).forEach(([b,n])=>{const o=document.createElement("option");o.value=b;o.textContent=`${b} (${n})`;badgeSel.appendChild(o)});
+  badgeSel.addEventListener("change",()=>{activeBadge=badgeSel.value;render()});
+  $("#q").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();render()});
+
+  function visible(){
+    return locs.filter(l=>(!activeState||l.state===activeState)&&(!activeBadge||(l.badge||"Experience Centre")===activeBadge)
+      &&(!query||[l.name,l.city,l.address,String(l.postcode),l.state].join(" ").toLowerCase().includes(query)));
+  }
+  function render(){
+    const v=visible(); const ids=new Set(v.map(l=>l.id));
+    mapApi.setVisible(ids);
+    STATES.forEach(s=>$("#st-"+s).setAttribute("aria-pressed",String(s===activeState)));
+    $("#mapTitle").textContent=activeState?`${activeState} · ${CN[activeState]} · ${data.by_state[activeState]} 家`:"全国分布";
+    $("#listCount").textContent=`${v.length} / ${locs.length}`;
+    const list=$("#list"); list.innerHTML="";
+    if(!v.length){list.innerHTML=`<div class="empty">没有符合条件的门店</div>`;return}
+    v.forEach(l=>{
+      const r=document.createElement("div"); r.className="row"+(hl===l.id?" hl":""); r.id="row-"+l.id;
+      const badge=l.badge&&l.badge!=="Experience Centre"?`<span class="badge ${isSoon(l.badge)?"soon":""}">${esc(l.badge)}</span>`:`<span class="badge">营业中</span>`;
+      const pc=String(l.postcode||"").padStart(4,"0");
+      const coord=(l.lat&&l.lng)?`${Number(l.lat).toFixed(5)}, ${Number(l.lng).toFixed(5)}`:"—";
+      r.innerHTML=`<div class="stc">${l.state}</div><div><div class="nm">${esc(l.name)}</div><div class="ad">${esc(l.address)} ${esc(l.city)} ${l.state}</div><div class="ph num">邮编 ${esc(pc)} · 经纬度 ${coord}${l.phone?` · ${esc(l.phone)}`:""}</div></div>${badge}`;
+      r.addEventListener("click",()=>highlight(l.id));
+      list.appendChild(r);
+    });
+    if(hl){const el=document.getElementById("row-"+hl); if(el) el.scrollIntoView({block:"nearest"});}
+  }
+  function highlight(id){
+    hl=(hl===id?null:id);
+    if(hl) mapApi.focus(hl); else mapApi.clearFocus();
+    render();
+  }
+  function setState(s){activeState=s;hl=null;mapApi.clearFocus();mapApi.zoomTo(s);render()}
+  render();
+
+  // ---- Excel 导出 ----
+  const exportBtn=$("#exportXlsx");
+  exportBtn.addEventListener("click",async()=>{
+    if(typeof XLSX==="undefined"){exportBtn.textContent="导出组件未加载";return}
+    const v=visible();
+    const wb=XLSX.utils.book_new();
+    const rows=v.map(l=>({"门店 ID":l.id,"门店名称":l.name,"类型":l.badge||"Experience Centre","状态":isSoon(l.badge)?"即将开业/快闪":"营业中","地址":l.address,"城市/区":l.city,"州":l.state,"邮编":String(l.postcode||"").padStart(4,"0"),"电话":l.phone,"网站":l.website,"纬度":l.lat,"经度":l.lng}));
+    const ws1=XLSX.utils.json_to_sheet(rows); ws1["!cols"]=[6,26,22,14,34,18,6,8,14,30,12,12].map(w=>({wch:w}));
+    XLSX.utils.book_append_sheet(wb,ws1,activeState?`门店明细-${activeState}`:"门店明细");
+    const sum=STATES.map(s=>({"州":s,"中文":CN[s],"销售点数量":data.by_state[s]||0,"较上次快照":prev?(data.by_state[s]||0)-(prev.by_state[s]||0):""}));
+    sum.push({"州":"合计","中文":"","销售点数量":data.count,"较上次快照":prev?data.count-prev.count:""});
+    const ws2=XLSX.utils.json_to_sheet(sum); ws2["!cols"]=[8,10,12,12].map(w=>({wch:w}));
+    XLSX.utils.book_append_sheet(wb,ws2,"分州汇总");
+    const pcRows=Object.entries(byPostcode).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0])).map(([pc,ls])=>({"邮编":pc,"州":ls[0].state,"门店数":ls.length,"门店":ls.map(x=>x.name).join("、")}));
+    const ws3=XLSX.utils.json_to_sheet(pcRows); ws3["!cols"]=[8,6,8,60].map(w=>({wch:w}));
+    XLSX.utils.book_append_sheet(wb,ws3,"按邮编");
+    const typeRows=Object.entries(data.by_badge).map(([k,n])=>({"类型":k,"数量":n}));
+    XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(typeRows),"类型汇总");
+    const chg=[];
+    history.forEach(h=>{
+      (h.added||[]).forEach(x=>chg.push({"日期":h.date,"变动":"新增","门店":x.name,"州":x.state,"城市/区":x.city,"当日总数":h.count}));
+      (h.removed||[]).forEach(x=>chg.push({"日期":h.date,"变动":"关闭","门店":x.name,"州":x.state,"城市/区":x.city,"当日总数":h.count}));
+      (h.renamed||[]).forEach(x=>chg.push({"日期":h.date,"变动":"改名","门店":`${x.from} → ${x.to}`,"州":"","城市/区":"","当日总数":h.count}));
+    });
+    const ws4=XLSX.utils.json_to_sheet(chg.length?chg:[{"日期":"","变动":"暂无变动","门店":"","州":"","城市/区":"","当日总数":""}]); ws4["!cols"]=[12,8,30,6,16,10].map(w=>({wch:w}));
+    XLSX.utils.book_append_sheet(wb,ws4,"变动记录");
+    const hist=history.map(h=>({"日期":h.date,"总数":h.count,...Object.fromEntries(STATES.map(s=>[s,h.by_state?.[s]??""]))}));
+    XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(hist),"每日快照");
+    const meta=XLSX.utils.aoa_to_sheet([["数据来源",data.source],["抓取时间",data.fetched_at_aest],["抓取时间(UTC)",data.fetched_at_utc],["导出时间",new Date().toLocaleString("zh-CN")],["筛选条件",[activeState?"州="+activeState:"",activeBadge?"类型="+activeBadge:"",query?"搜索="+query:""].filter(Boolean).join("；")||"无"]]);
+    meta["!cols"]=[{wch:14},{wch:50}];
+    XLSX.utils.book_append_sheet(wb,meta,"说明");
+    const buf=XLSX.write(wb,{bookType:"xlsx",type:"array"});
+    const fname=`BYD_AU_stores_${data.fetched_at_utc.slice(0,10)}${activeState?"_"+activeState:""}.xlsx`;
+    const old=exportBtn.textContent; exportBtn.disabled=true; exportBtn.textContent="正在导出…";
+    try{
+      const dl=window.claude?.use?await window.claude.use("downloads"):null;
+      if(dl){ await dl.save({filename:fname,data:new Blob([buf])}); }
+      else{
+        const url=URL.createObjectURL(new Blob([buf],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}));
+        const a=document.createElement("a"); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),4000);
+      }
+      exportBtn.textContent="已导出";
+    }catch(e){ exportBtn.textContent=e&&e.code==="declined"?"已取消":"导出失败"; }
+    setTimeout(()=>{exportBtn.textContent=old;exportBtn.disabled=false},2200);
+  });
+
+  // ---- 变动记录 ----
+  const log=$("#log");
+  const changes=history.slice().reverse().filter(h=>(h.added&&h.added.length)||(h.removed&&h.removed.length)||(h.renamed&&h.renamed.length));
+  $("#logNote").textContent=`${history.length} 次快照 · ${changes.length} 次有变动`;
+  if(!changes.length){
+    log.innerHTML=`<div class="empty">暂无变动。${history.length<2?"首次快照建立于 "+(last?last.date:"今日")+"，自下次抓取起开始比对。":"最近 "+history.length+" 次快照门店名单一致。"}</div>`;
+  }else changes.forEach(h=>{
+    const r=document.createElement("div"); r.className="logrow";
+    let c="";
+    (h.added||[]).forEach(x=>c+=`<span class="chg add">＋ 新增 ${esc(x.name)}（${x.state} ${esc(x.city)}）</span>`);
+    (h.removed||[]).forEach(x=>c+=`<span class="chg rem">－ 关闭 ${esc(x.name)}（${x.state} ${esc(x.city)}）</span>`);
+    (h.renamed||[]).forEach(x=>c+=`<span class="chg ren">改名 ${esc(x.from)} → ${esc(x.to)}</span>`);
+    r.innerHTML=`<div class="d num">${h.date}<br>共 ${h.count} 家</div><div class="c">${c}</div>`; log.appendChild(r);
+  });
+
+  // ---- 趋势 ----
+  (function trend(){
+    const t=$("#trend"); const pts=history.map(h=>({d:h.date,v:h.count})); if(!pts.length) return;
+    const L_=36,R=12,T=14,B=28,w=520,h=180; const iw=w-L_-R, ih=h-T-B;
+    const vals=pts.map(p=>p.v); let lo=Math.min(...vals), hi=Math.max(...vals); if(hi-lo<6){const m=(hi+lo)/2;lo=Math.floor(m-4);hi=Math.ceil(m+4)}
+    const X=i=>L_+(pts.length===1?iw/2:i*iw/(pts.length-1)), Y=v=>T+ih-(v-lo)/(hi-lo)*ih;
+    let s="";
+    const ticks=4; for(let i=0;i<=ticks;i++){const v=Math.round(lo+(hi-lo)*i/ticks); s+=`<line class="ax" x1="${L_}" x2="${w-R}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${L_-6}" y="${(Y(v)+3).toFixed(1)}" text-anchor="end">${v}</text>`}
+    const line=pts.map((p,i)=>`${i?"L":"M"}${X(i).toFixed(1)} ${Y(p.v).toFixed(1)}`).join("");
+    if(pts.length>1) s+=`<path class="ar" d="${line}L${X(pts.length-1).toFixed(1)} ${(T+ih).toFixed(1)}L${X(0).toFixed(1)} ${(T+ih).toFixed(1)}Z"/><path class="ln" d="${line}"/>`;
+    pts.forEach((p,i)=>{ if(pts.length<=40||i===pts.length-1||i===0) s+=`<circle class="pt" cx="${X(i).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="${i===pts.length-1?3.5:2}"/>`; });
+    const lab=[0]; if(pts.length>1) lab.push(pts.length-1); if(pts.length>4) lab.splice(1,0,Math.floor((pts.length-1)/2));
+    lab.forEach(i=>s+=`<text x="${X(i).toFixed(1)}" y="${h-10}" text-anchor="${i===0?"start":i===pts.length-1?"end":"middle"}">${pts[i].d}</text>`);
+    s+=`<text x="${X(pts.length-1).toFixed(1)}" y="${(Y(pts[pts.length-1].v)-8).toFixed(1)}" text-anchor="end" style="fill:var(--accent);font-weight:600">${pts[pts.length-1].v}</text>`;
+    t.innerHTML=s;
+  })();
+
+  if(REAL) $("#foot").insertAdjacentHTML("beforeend",' 底图：OpenStreetMap；邮编区域：ABS ASGS Edition 3 Postal Areas (POA) 2021，已简化以便网页显示。');
+})();
+</script>
+
+</body>
+</html>

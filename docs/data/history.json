@@ -1,0 +1,20 @@
+[
+ {
+  "date": "2026-10-13",
+  "fetched_at_utc": "2026-10-13T02:11:28Z",
+  "count": 130,
+  "by_state": {
+   "NSW": 43,
+   "VIC": 36,
+   "QLD": 23,
+   "WA": 11,
+   "SA": 11,
+   "TAS": 3,
+   "ACT": 2,
+   "NT": 1
+  },
+  "added": [],
+  "removed": [],
+  "renamed": []
+ }
+]
