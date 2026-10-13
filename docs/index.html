@@ -130,14 +130,14 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
 
 <header>
   <div>
-    <div class="eyebrow">BYD Australia · 销售网点（Experience Centre 类）</div>
+    <div class="eyebrow">BYD Australia · 销售网点</div>
     <h1>BYD 澳洲门店监控</h1>
     <div class="sub" id="sub">正在读取数据…</div>
   </div>
   <div class="total">
     <span class="big num" id="total">—</span>
     <span>
-      <div class="eyebrow">家销售点</div>
+      <div class="eyebrow">家 Experience Centre</div>
       <div class="delta flat" id="totalDelta"></div>
     </span>
   </div>
@@ -181,7 +181,7 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
     <div class="log" id="log"></div>
   </div>
   <div class="panel">
-    <div class="panel-h"><h2>门店总数趋势</h2><span class="eyebrow">每日快照</span></div>
+    <div class="panel-h"><h2>Experience Centre 数量趋势</h2><span class="eyebrow">每日快照</span></div>
     <div style="padding:10px 14px 14px"><svg class="trend" id="trend" viewBox="0 0 520 180" role="img" aria-label="门店总数趋势"></svg></div>
   </div>
 </section>
@@ -212,7 +212,8 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
   const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
   // ---- 顶部 ----
-  $("#sub").textContent=`数据抓取时间 ${data.fetched_at_aest} · 官网全部点位 ${Object.values(data.all_pin_types||{}).reduce((a,b)=>a+b,0)} 个，其中销售点 ${data.count} 家`;
+  const others=Object.entries(data.by_badge||{}).filter(([k])=>k!=="Experience Centre").map(([k,n])=>`${({"Coming Soon":"即将开业","Pop-up Experience":"快闪店","Test Drive & Delivery Centre":"试驾交付中心"})[k]||k} ${n}`).join(" · ");
+  $("#sub").textContent=`数据抓取时间 ${data.fetched_at_aest} · 正式营业 Experience Centre ${data.count} 家${others?"，另有 "+others:""}（销售点位合计 ${data.count_all??data.count}）`;
   $("#total").textContent=data.count;
   const td=$("#totalDelta");
   if(prev){const d=data.count-prev.count; td.textContent=(d>0?"+":"")+d+" 较 "+prev.date; td.className="delta "+(d>0?"pos":d<0?"neg":"flat");}
@@ -223,8 +224,8 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
   const stWrap=$("#states");
   STATES.forEach(s=>{
     const b=document.createElement("button"); b.type="button"; b.className="state"; b.id="st-"+s; b.setAttribute("aria-pressed","false");
-    const n=data.by_state[s]||0; const d=prev?(n-(prev.by_state[s]||0)):0;
-    b.innerHTML=`<div class="k">${s} <span style="font-weight:500">${CN[s]}</span></div><div class="v num">${n}</div><div class="d num ${d>0?"delta pos":d<0?"delta neg":"delta flat"}">${prev?(d===0?"持平":(d>0?"+":"")+d):""}</div>`;
+    const n=data.by_state[s]||0; const d=prev?(n-(prev.by_state[s]||0)):0; const extra=((data.by_state_all||{})[s]||n)-n;
+    b.innerHTML=`<div class="k">${s} <span style="font-weight:500">${CN[s]}</span></div><div class="v num">${n}</div><div class="d num ${d>0?"delta pos":d<0?"delta neg":"delta flat"}">${prev?(d===0?"持平":(d>0?"+":"")+d):""}${extra?`<span style="color:var(--warn);font-weight:600"> ${prev?"· ":""}其他点位 ${extra}</span>`:""}</div>`;
     b.addEventListener("click",()=>setState(activeState===s?null:s));
     stWrap.appendChild(b);
   });
@@ -372,7 +373,7 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
     const v=visible(); const ids=new Set(v.map(l=>l.id));
     mapApi.setVisible(ids);
     STATES.forEach(s=>$("#st-"+s).setAttribute("aria-pressed",String(s===activeState)));
-    $("#mapTitle").textContent=activeState?`${activeState} · ${CN[activeState]} · ${data.by_state[activeState]} 家`:"全国分布";
+    $("#mapTitle").textContent=activeState?`${activeState} · ${CN[activeState]} · Experience Centre ${data.by_state[activeState]} 家`:"全国分布";
     $("#listCount").textContent=`${v.length} / ${locs.length}`;
     const list=$("#list"); list.innerHTML="";
     if(!v.length){list.innerHTML=`<div class="empty">没有符合条件的门店</div>`;return}
@@ -404,9 +405,9 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
     const rows=v.map(l=>({"门店 ID":l.id,"门店名称":l.name,"类型":l.badge||"Experience Centre","状态":isSoon(l.badge)?"即将开业/快闪":"营业中","地址":l.address,"城市/区":l.city,"州":l.state,"邮编":String(l.postcode||"").padStart(4,"0"),"电话":l.phone,"网站":l.website,"纬度":l.lat,"经度":l.lng}));
     const ws1=XLSX.utils.json_to_sheet(rows); ws1["!cols"]=[6,26,22,14,34,18,6,8,14,30,12,12].map(w=>({wch:w}));
     XLSX.utils.book_append_sheet(wb,ws1,activeState?`门店明细-${activeState}`:"门店明细");
-    const sum=STATES.map(s=>({"州":s,"中文":CN[s],"销售点数量":data.by_state[s]||0,"较上次快照":prev?(data.by_state[s]||0)-(prev.by_state[s]||0):""}));
-    sum.push({"州":"合计","中文":"","销售点数量":data.count,"较上次快照":prev?data.count-prev.count:""});
-    const ws2=XLSX.utils.json_to_sheet(sum); ws2["!cols"]=[8,10,12,12].map(w=>({wch:w}));
+    const sum=STATES.map(s=>({"州":s,"中文":CN[s],"Experience Centre":data.by_state[s]||0,"较上次快照":prev?(data.by_state[s]||0)-(prev.by_state[s]||0):"","其他销售点位（待开业/快闪等）":((data.by_state_all||{})[s]||0)-(data.by_state[s]||0),"销售点位合计":(data.by_state_all||{})[s]||0}));
+    sum.push({"州":"合计","中文":"","Experience Centre":data.count,"较上次快照":prev?data.count-prev.count:"","其他销售点位（待开业/快闪等）":(data.count_all||0)-data.count,"销售点位合计":data.count_all||0});
+    const ws2=XLSX.utils.json_to_sheet(sum); ws2["!cols"]=[8,10,18,12,28,14].map(w=>({wch:w}));
     XLSX.utils.book_append_sheet(wb,ws2,"分州汇总");
     const pcRows=Object.entries(byPostcode).sort((a,b)=>b[1].length-a[1].length||a[0].localeCompare(b[0])).map(([pc,ls])=>({"邮编":pc,"州":ls[0].state,"门店数":ls.length,"门店":ls.map(x=>x.name).join("、")}));
     const ws3=XLSX.utils.json_to_sheet(pcRows); ws3["!cols"]=[8,6,8,60].map(w=>({wch:w}));
@@ -418,10 +419,11 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
       (h.added||[]).forEach(x=>chg.push({"日期":h.date,"变动":"新增","门店":x.name,"州":x.state,"城市/区":x.city,"当日总数":h.count}));
       (h.removed||[]).forEach(x=>chg.push({"日期":h.date,"变动":"关闭","门店":x.name,"州":x.state,"城市/区":x.city,"当日总数":h.count}));
       (h.renamed||[]).forEach(x=>chg.push({"日期":h.date,"变动":"改名","门店":`${x.from} → ${x.to}`,"州":"","城市/区":"","当日总数":h.count}));
+      (h.status||[]).forEach(x=>chg.push({"日期":h.date,"变动":x.to==="Experience Centre"?"开业":"状态变化","门店":`${x.name}：${x.from} → ${x.to}`,"州":x.state,"城市/区":"","当日总数":h.count}));
     });
     const ws4=XLSX.utils.json_to_sheet(chg.length?chg:[{"日期":"","变动":"暂无变动","门店":"","州":"","城市/区":"","当日总数":""}]); ws4["!cols"]=[12,8,30,6,16,10].map(w=>({wch:w}));
     XLSX.utils.book_append_sheet(wb,ws4,"变动记录");
-    const hist=history.map(h=>({"日期":h.date,"总数":h.count,...Object.fromEntries(STATES.map(s=>[s,h.by_state?.[s]??""]))}));
+    const hist=history.map(h=>({"日期":h.date,"Experience Centre":h.count,"销售点位合计":h.count_all??"",...Object.fromEntries(STATES.map(s=>[s,h.by_state?.[s]??""]))}));
     XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(hist),"每日快照");
     const meta=XLSX.utils.aoa_to_sheet([["数据来源",data.source],["抓取时间",data.fetched_at_aest],["抓取时间(UTC)",data.fetched_at_utc],["导出时间",new Date().toLocaleString("zh-CN")],["筛选条件",[activeState?"州="+activeState:"",activeBadge?"类型="+activeBadge:"",query?"搜索="+query:""].filter(Boolean).join("；")||"无"]]);
     meta["!cols"]=[{wch:14},{wch:50}];
@@ -443,7 +445,7 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
 
   // ---- 变动记录 ----
   const log=$("#log");
-  const changes=history.slice().reverse().filter(h=>(h.added&&h.added.length)||(h.removed&&h.removed.length)||(h.renamed&&h.renamed.length));
+  const changes=history.slice().reverse().filter(h=>(h.added&&h.added.length)||(h.removed&&h.removed.length)||(h.renamed&&h.renamed.length)||(h.status&&h.status.length));
   $("#logNote").textContent=`${history.length} 次快照 · ${changes.length} 次有变动`;
   if(!changes.length){
     log.innerHTML=`<div class="empty">暂无变动。${history.length<2?"首次快照建立于 "+(last?last.date:"今日")+"，自下次抓取起开始比对。":"最近 "+history.length+" 次快照门店名单一致。"}</div>`;
@@ -453,7 +455,8 @@ svg.trend{display:block;width:100%;height:auto;max-width:100%}
     (h.added||[]).forEach(x=>c+=`<span class="chg add">＋ 新增 ${esc(x.name)}（${x.state} ${esc(x.city)}）</span>`);
     (h.removed||[]).forEach(x=>c+=`<span class="chg rem">－ 关闭 ${esc(x.name)}（${x.state} ${esc(x.city)}）</span>`);
     (h.renamed||[]).forEach(x=>c+=`<span class="chg ren">改名 ${esc(x.from)} → ${esc(x.to)}</span>`);
-    r.innerHTML=`<div class="d num">${h.date}<br>共 ${h.count} 家</div><div class="c">${c}</div>`; log.appendChild(r);
+    (h.status||[]).forEach(x=>c+=`<span class="chg ${x.to==="Experience Centre"?"add":"ren"}">${x.to==="Experience Centre"?"◎ 开业":"~ 状态"} ${esc(x.name)}（${x.state}）${esc(x.from)} → ${esc(x.to)}</span>`);
+    r.innerHTML=`<div class="d num">${h.date}<br>EC ${h.count} 家</div><div class="c">${c}</div>`; log.appendChild(r);
   });
 
   // ---- 趋势 ----

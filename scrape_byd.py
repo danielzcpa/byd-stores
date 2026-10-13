@@ -76,7 +76,11 @@ def slim(loc: dict) -> dict:
 def build_snapshot(raw: list[dict]) -> dict:
     sales = [slim(x) for x in raw if x.get("pinType") == "pickup"]
     sales.sort(key=lambda x: (STATES.index(x["state"]) if x["state"] in STATES else 99, x["name"]))
-    by_state = {s: sum(1 for x in sales if x["state"] == s) for s in STATES}
+    # 口径：count / by_state 只统计正式营业的 Experience Centre；
+    #       count_all / by_state_all 包含 Coming Soon、快闪店、试驾交付中心等全部销售点位
+    ec = [x for x in sales if x["badge"] == "Experience Centre"]
+    by_state = {s: sum(1 for x in ec if x["state"] == s) for s in STATES}
+    by_state_all = {s: sum(1 for x in sales if x["state"] == s) for s in STATES}
     by_badge: dict[str, int] = {}
     for x in sales:
         by_badge[x["badge"] or "Experience Centre"] = by_badge.get(x["badge"] or "Experience Centre", 0) + 1
@@ -89,8 +93,10 @@ def build_snapshot(raw: list[dict]) -> dict:
         "source": URL,
         "fetched_at_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "fetched_at_aest": syd.strftime("%Y-%m-%d %H:%M ") + syd.tzname(),
-        "count": len(sales),
+        "count": len(ec),
+        "count_all": len(sales),
         "by_state": by_state,
+        "by_state_all": by_state_all,
         "by_badge": by_badge,
         "all_pin_types": all_types,  # 官网全部点位类型计数（含服务中心、钣喷等），供参考
         "locations": sales,
@@ -99,7 +105,7 @@ def build_snapshot(raw: list[dict]) -> dict:
 
 def diff(prev: dict | None, cur: dict) -> dict:
     if not prev:
-        return {"added": [], "removed": [], "renamed": []}
+        return {"added": [], "removed": [], "renamed": [], "status": []}
     p = {x["id"]: x for x in prev.get("locations", [])}
     c = {x["id"]: x for x in cur["locations"]}
     added = [c[i] for i in c if i not in p]
@@ -108,10 +114,15 @@ def diff(prev: dict | None, cur: dict) -> dict:
         {"id": i, "from": p[i]["name"], "to": c[i]["name"]}
         for i in c if i in p and p[i]["name"] != c[i]["name"]
     ]
+    status = [
+        {"id": i, "name": c[i]["name"], "state": c[i]["state"], "from": p[i].get("badge", ""), "to": c[i]["badge"]}
+        for i in c if i in p and p[i].get("badge", "") != c[i]["badge"]
+    ]
     return {
-        "added": [{"id": x["id"], "name": x["name"], "state": x["state"], "city": x["city"]} for x in added],
-        "removed": [{"id": x["id"], "name": x["name"], "state": x["state"], "city": x["city"]} for x in removed],
+        "added": [{"id": x["id"], "name": x["name"], "state": x["state"], "city": x["city"], "badge": x["badge"]} for x in added],
+        "removed": [{"id": x["id"], "name": x["name"], "state": x["state"], "city": x["city"], "badge": x["badge"]} for x in removed],
         "renamed": renamed,
+        "status": status,
     }
 
 
@@ -139,7 +150,9 @@ def main() -> int:
         "date": cur["fetched_at_utc"][:10],
         "fetched_at_utc": cur["fetched_at_utc"],
         "count": cur["count"],
+        "count_all": cur["count_all"],
         "by_state": cur["by_state"],
+        "by_state_all": cur["by_state_all"],
         **d,
     })
     # 同一天多次运行只保留最后一次
@@ -151,14 +164,16 @@ def main() -> int:
     (out / "locations.json").write_text(json.dumps(cur, ensure_ascii=False, indent=1))
     (out / "history.json").write_text(json.dumps(history, ensure_ascii=False, indent=1))
 
-    print(f"抓取时间 {cur['fetched_at_aest']}  销售点 {cur['count']} 家  "
-          f"新增 {len(d['added'])}  关闭 {len(d['removed'])}  改名 {len(d['renamed'])}")
+    print(f"抓取时间 {cur['fetched_at_aest']}  Experience Centre {cur['count']} 家（全部销售点位 {cur['count_all']}）  "
+          f"新增 {len(d['added'])}  关闭 {len(d['removed'])}  改名 {len(d['renamed'])}  状态变化 {len(d['status'])}")
     for s in STATES:
         print(f"  {s:<4}{cur['by_state'][s]:>4}")
     for x in d["added"]:
         print("  + 新增:", x["name"], x["state"])
     for x in d["removed"]:
         print("  - 关闭:", x["name"], x["state"])
+    for x in d["status"]:
+        print("  ~ 状态:", x["name"], x["state"], x["from"], "->", x["to"])
     return 0
 
 
