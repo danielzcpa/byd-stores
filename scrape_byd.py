@@ -147,7 +147,7 @@ def main() -> int:
     d = diff(prev, cur)
 
     history.append({
-        "date": cur["fetched_at_utc"][:10],
+        "date": cur["fetched_at_aest"][:10],   # 按悉尼日期归档，避免 UTC 跨日错位
         "fetched_at_utc": cur["fetched_at_utc"],
         "count": cur["count"],
         "count_all": cur["count_all"],
