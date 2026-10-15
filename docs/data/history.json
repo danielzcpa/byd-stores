@@ -61,7 +61,7 @@
  },
  {
   "date": "2026-10-15",
-  "fetched_at_utc": "2026-10-15T00:50:19Z",
+  "fetched_at_utc": "2026-10-15T05:50:32Z",
   "count": 122,
   "count_all": 130,
   "by_state": {
@@ -84,8 +84,1830 @@
    "ACT": 2,
    "NT": 1
   },
-  "added": [],
-  "removed": [],
+  "added": [
+   {
+    "id": "4452",
+    "name": "BYD Albion Park",
+    "state": "NSW",
+    "city": "Albion Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "130",
+    "name": "BYD Alexandria",
+    "state": "NSW",
+    "city": "Alexandria",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "380",
+    "name": "BYD Artarmon",
+    "state": "NSW",
+    "city": "Artarmon",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4025",
+    "name": "BYD Bathurst",
+    "state": "NSW",
+    "city": "Robin Hill",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4318",
+    "name": "BYD Bega Valley",
+    "state": "NSW",
+    "city": "Bega",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "119",
+    "name": "BYD Blacktown",
+    "state": "NSW",
+    "city": "Blacktown",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "282",
+    "name": "BYD Brookvale",
+    "state": "NSW",
+    "city": "Brookvale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4049",
+    "name": "BYD Campbelltown",
+    "state": "NSW",
+    "city": "Campbelltown",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4098",
+    "name": "BYD Castle Hill",
+    "state": "NSW",
+    "city": "Castle Hill",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4343",
+    "name": "BYD Cessnock",
+    "state": "NSW",
+    "city": "Cessnock",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "279",
+    "name": "BYD Coffs Coast",
+    "state": "NSW",
+    "city": "Coffs Harbour",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4396",
+    "name": "BYD Cooma",
+    "state": "NSW",
+    "city": "Cooma",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4032",
+    "name": "BYD Dubbo",
+    "state": "NSW",
+    "city": "Dubbo",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "18",
+    "name": "BYD Glendale",
+    "state": "NSW",
+    "city": "Glendale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "199",
+    "name": "BYD Gosford",
+    "state": "NSW",
+    "city": "West Gosford",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4319",
+    "name": "BYD Goulburn",
+    "state": "NSW",
+    "city": "Goulburn",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4115",
+    "name": "BYD Griffith",
+    "state": "NSW",
+    "city": "Griffith",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4047",
+    "name": "BYD Haberfield",
+    "state": "NSW",
+    "city": "Haberfield",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4299",
+    "name": "BYD Homebush",
+    "state": "NSW",
+    "city": "Homebush",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4308",
+    "name": "BYD Hornsby",
+    "state": "NSW",
+    "city": "Waitara",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "112",
+    "name": "BYD Liverpool",
+    "state": "NSW",
+    "city": "Liverpool",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "178",
+    "name": "BYD Maitland",
+    "state": "NSW",
+    "city": "East Maitland",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4118",
+    "name": "BYD Moruya",
+    "state": "NSW",
+    "city": "Moruya",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4362",
+    "name": "BYD Mudgee",
+    "state": "NSW",
+    "city": "Mudgee",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4345",
+    "name": "BYD Muswellbrook",
+    "state": "NSW",
+    "city": "Muswellbrook",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4310",
+    "name": "BYD Narellan",
+    "state": "NSW",
+    "city": "Gregory Hills",
+    "badge": "Pop-up Experience"
+   },
+   {
+    "id": "4015",
+    "name": "BYD Newcastle City",
+    "state": "NSW",
+    "city": "Maryville",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4097",
+    "name": "BYD Nowra",
+    "state": "NSW",
+    "city": "Bomaderry",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4017",
+    "name": "BYD Orange",
+    "state": "NSW",
+    "city": "Orange",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "200",
+    "name": "BYD Parramatta",
+    "state": "NSW",
+    "city": "Granville",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "201",
+    "name": "BYD Penrith",
+    "state": "NSW",
+    "city": "Kingswood",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "283",
+    "name": "BYD Port Macquarie",
+    "state": "NSW",
+    "city": "Port Macquarie",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4305",
+    "name": "BYD Rockdale",
+    "state": "NSW",
+    "city": "Rockdale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4379",
+    "name": "BYD Ryde",
+    "state": "NSW",
+    "city": "West Ryde",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4351",
+    "name": "BYD Singleton",
+    "state": "NSW",
+    "city": "Singleton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4054",
+    "name": "BYD Southern Highlands",
+    "state": "NSW",
+    "city": "Moss Vale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "16",
+    "name": "BYD Sutherland",
+    "state": "NSW",
+    "city": "Sutherland",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "335",
+    "name": "BYD Tamworth",
+    "state": "NSW",
+    "city": "Tamworth",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4320",
+    "name": "BYD Taree",
+    "state": "NSW",
+    "city": "Taree",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "209",
+    "name": "BYD Tuggerah",
+    "state": "NSW",
+    "city": "Tuggerah",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4124",
+    "name": "BYD Wagga Wagga",
+    "state": "NSW",
+    "city": "East Wagga Wagga",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4122",
+    "name": "BYD Windsor",
+    "state": "NSW",
+    "city": "Windsor",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4048",
+    "name": "BYD Wollongong",
+    "state": "NSW",
+    "city": "Wollongong",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "337",
+    "name": "BYD Ballarat",
+    "state": "VIC",
+    "city": "Ballarat Central",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "285",
+    "name": "BYD Bendigo",
+    "state": "VIC",
+    "city": "Epsom",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4394",
+    "name": "BYD Berwick",
+    "state": "VIC",
+    "city": "Berwick",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4307",
+    "name": "BYD Box Hill",
+    "state": "VIC",
+    "city": "Box Hill",
+    "badge": "Pop-up Experience"
+   },
+   {
+    "id": "122",
+    "name": "BYD Brighton",
+    "state": "VIC",
+    "city": "Bentleigh",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "17",
+    "name": "BYD Brooklyn",
+    "state": "VIC",
+    "city": "Brooklyn",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4050",
+    "name": "BYD Caroline Springs",
+    "state": "VIC",
+    "city": "Ravenhall",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "89",
+    "name": "BYD Chadstone",
+    "state": "VIC",
+    "city": "Malvern East",
+    "badge": "Pop-up Experience"
+   },
+   {
+    "id": "4132",
+    "name": "BYD Cranbourne",
+    "state": "VIC",
+    "city": "Cranbourne West",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "5",
+    "name": "BYD Dandenong",
+    "state": "VIC",
+    "city": "Dandenong",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4090",
+    "name": "BYD Doncaster",
+    "state": "VIC",
+    "city": "Doncaster East",
+    "badge": "Coming Soon"
+   },
+   {
+    "id": "278",
+    "name": "BYD Essendon",
+    "state": "VIC",
+    "city": "Essendon Fields",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4296",
+    "name": "BYD Fairfield",
+    "state": "VIC",
+    "city": "Fairfield",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4375",
+    "name": "BYD Ferntree Gully",
+    "state": "VIC",
+    "city": "Ferntree Gully",
+    "badge": "Coming Soon"
+   },
+   {
+    "id": "4311",
+    "name": "BYD Frankston",
+    "state": "VIC",
+    "city": "Frankston",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "336",
+    "name": "BYD Geelong",
+    "state": "VIC",
+    "city": "Belmont",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4460",
+    "name": "BYD Kilmore",
+    "state": "VIC",
+    "city": "Kilmore",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4347",
+    "name": "BYD Lilydale",
+    "state": "VIC",
+    "city": "Lilydale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4044",
+    "name": "BYD Melbourne City",
+    "state": "VIC",
+    "city": "Melbourne",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4119",
+    "name": "BYD Mildura",
+    "state": "VIC",
+    "city": "Mildura",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "367",
+    "name": "BYD Mornington",
+    "state": "VIC",
+    "city": "Mornington",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4301",
+    "name": "BYD Nunawading",
+    "state": "VIC",
+    "city": "Nunawading",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4316",
+    "name": "BYD Pakenham",
+    "state": "VIC",
+    "city": "Pakenham",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4056",
+    "name": "BYD Port Melbourne",
+    "state": "VIC",
+    "city": "Port Melbourne",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "182",
+    "name": "BYD Richmond",
+    "state": "VIC",
+    "city": "Cremorne",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4042",
+    "name": "BYD Ringwood",
+    "state": "VIC",
+    "city": "Ringwood",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4357",
+    "name": "BYD Seymour",
+    "state": "VIC",
+    "city": "Seymour",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "342",
+    "name": "BYD Shepparton",
+    "state": "VIC",
+    "city": "Shepparton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "378",
+    "name": "BYD South Morang",
+    "state": "VIC",
+    "city": "Mill Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4346",
+    "name": "BYD Sunbury",
+    "state": "VIC",
+    "city": "Sunbury",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4300",
+    "name": "BYD Traralgon",
+    "state": "VIC",
+    "city": "Traralgon",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4356",
+    "name": "BYD Warragul",
+    "state": "VIC",
+    "city": "Warragul",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4020",
+    "name": "BYD Warrnambool",
+    "state": "VIC",
+    "city": "Warrnambool",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "275",
+    "name": "BYD Waverley",
+    "state": "VIC",
+    "city": "Mulgrave",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4013",
+    "name": "BYD Werribee",
+    "state": "VIC",
+    "city": "Hoppers Crossing",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4123",
+    "name": "BYD Wodonga",
+    "state": "VIC",
+    "city": "Wodonga",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "208",
+    "name": "BYD Aspley",
+    "state": "QLD",
+    "city": "Aspley",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "142",
+    "name": "BYD Brisbane",
+    "state": "QLD",
+    "city": "Newstead",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4156",
+    "name": "BYD Bundaberg",
+    "state": "QLD",
+    "city": "Bundaberg West",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4117",
+    "name": "BYD Burleigh Heads",
+    "state": "QLD",
+    "city": "Burleigh Heads",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "148",
+    "name": "BYD Cairns",
+    "state": "QLD",
+    "city": "Cairns",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4371",
+    "name": "BYD Capalaba",
+    "state": "QLD",
+    "city": "Capalaba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4349",
+    "name": "BYD Dalby",
+    "state": "QLD",
+    "city": "Dalby",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4114",
+    "name": "BYD Gladstone",
+    "state": "QLD",
+    "city": "Gladstone",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "274",
+    "name": "BYD Gold Coast",
+    "state": "QLD",
+    "city": "Bundall",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4157",
+    "name": "BYD Hervey Bay",
+    "state": "QLD",
+    "city": "Pialba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "3",
+    "name": "BYD Indooroopilly",
+    "state": "QLD",
+    "city": "Indooroopilly",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4037",
+    "name": "BYD Ipswich",
+    "state": "QLD",
+    "city": "Bundamba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4146",
+    "name": "BYD Mackay",
+    "state": "QLD",
+    "city": "Mackay",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4393",
+    "name": "BYD Mareeba",
+    "state": "QLD",
+    "city": "Mareeba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4373",
+    "name": "BYD Moorooka",
+    "state": "QLD",
+    "city": "Moorooka",
+    "badge": "Test Drive & Delivery Centre"
+   },
+   {
+    "id": "4068",
+    "name": "BYD Mount Gravatt",
+    "state": "QLD",
+    "city": "Mount Gravatt",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4309",
+    "name": "BYD Noosa",
+    "state": "QLD",
+    "city": "Noosaville",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "149",
+    "name": "BYD North Lakes",
+    "state": "QLD",
+    "city": "North Lakes",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4033",
+    "name": "BYD Rockhampton",
+    "state": "QLD",
+    "city": "Rockhampton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "184",
+    "name": "BYD Springwood",
+    "state": "QLD",
+    "city": "Rochedale South",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "151",
+    "name": "BYD Sunshine Coast",
+    "state": "QLD",
+    "city": "Maroochydore",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "147",
+    "name": "BYD Toowoomba",
+    "state": "QLD",
+    "city": "Toowoomba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "145",
+    "name": "BYD Townsville",
+    "state": "QLD",
+    "city": "Townsville",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4038",
+    "name": "BYD Albany",
+    "state": "WA",
+    "city": "Albany",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4027",
+    "name": "BYD Bunbury",
+    "state": "WA",
+    "city": "Bunbury",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "156",
+    "name": "BYD Cannington",
+    "state": "WA",
+    "city": "Cannington",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4028",
+    "name": "BYD Fremantle",
+    "state": "WA",
+    "city": "Fremantle",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4045",
+    "name": "BYD Geraldton",
+    "state": "WA",
+    "city": "Beresford",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4145",
+    "name": "BYD Mandurah",
+    "state": "WA",
+    "city": "Dudley Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4026",
+    "name": "BYD Midland",
+    "state": "WA",
+    "city": "Midland",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "144",
+    "name": "BYD Osborne Park",
+    "state": "WA",
+    "city": "Osborne Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4374",
+    "name": "BYD Rockingham",
+    "state": "WA",
+    "city": "Rockingham",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4043",
+    "name": "BYD Wangara",
+    "state": "WA",
+    "city": "Wangara",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "8",
+    "name": "BYD West Perth",
+    "state": "WA",
+    "city": "West Perth",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4348",
+    "name": "BYD Barossa",
+    "state": "SA",
+    "city": "Nuriootpa",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "163",
+    "name": "BYD Fullarton",
+    "state": "SA",
+    "city": "Fullarton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "7",
+    "name": "BYD Medindie",
+    "state": "SA",
+    "city": "Medindie",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "377",
+    "name": "BYD Mt Gambier",
+    "state": "SA",
+    "city": "Mt Gambier",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4030",
+    "name": "BYD Murray Bridge",
+    "state": "SA",
+    "city": "Murray Bridge",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4454",
+    "name": "BYD Port Augusta",
+    "state": "SA",
+    "city": "Port Augusta",
+    "badge": "Coming Soon"
+   },
+   {
+    "id": "4018",
+    "name": "BYD Reynella",
+    "state": "SA",
+    "city": "Morphett Vale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4129",
+    "name": "BYD Riverland",
+    "state": "SA",
+    "city": "Loxton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4019",
+    "name": "BYD Salisbury",
+    "state": "SA",
+    "city": "Salisbury Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "330",
+    "name": "BYD St Marys",
+    "state": "SA",
+    "city": "St Marys",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4380",
+    "name": "BYD Victor Harbor",
+    "state": "SA",
+    "city": "Victor Harbor",
+    "badge": "Coming Soon"
+   },
+   {
+    "id": "4055",
+    "name": "BYD Devonport",
+    "state": "TAS",
+    "city": "Devonport",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "6",
+    "name": "BYD Hobart",
+    "state": "TAS",
+    "city": "Hobart",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4021",
+    "name": "BYD Launceston",
+    "state": "TAS",
+    "city": "Launceston",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "152",
+    "name": "BYD Canberra",
+    "state": "ACT",
+    "city": "Belconnen",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4014",
+    "name": "BYD Phillip",
+    "state": "ACT",
+    "city": "Phillip",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": "4016",
+    "name": "BYD Darwin",
+    "state": "NT",
+    "city": "Stuart Park",
+    "badge": "Experience Centre"
+   }
+  ],
+  "removed": [
+   {
+    "id": 4452,
+    "name": "BYD Albion Park",
+    "state": "NSW",
+    "city": "Albion Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 130,
+    "name": "BYD Alexandria",
+    "state": "NSW",
+    "city": "Alexandria",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 380,
+    "name": "BYD Artarmon",
+    "state": "NSW",
+    "city": "Artarmon",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4025,
+    "name": "BYD Bathurst",
+    "state": "NSW",
+    "city": "Robin Hill",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4318,
+    "name": "BYD Bega Valley",
+    "state": "NSW",
+    "city": "Bega",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 119,
+    "name": "BYD Blacktown",
+    "state": "NSW",
+    "city": "Blacktown",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 282,
+    "name": "BYD Brookvale",
+    "state": "NSW",
+    "city": "Brookvale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4049,
+    "name": "BYD Campbelltown",
+    "state": "NSW",
+    "city": "Campbelltown",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4098,
+    "name": "BYD Castle Hill",
+    "state": "NSW",
+    "city": "Castle Hill",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4343,
+    "name": "BYD Cessnock",
+    "state": "NSW",
+    "city": "Cessnock",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 279,
+    "name": "BYD Coffs Coast",
+    "state": "NSW",
+    "city": "Coffs Harbour",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4396,
+    "name": "BYD Cooma",
+    "state": "NSW",
+    "city": "Cooma",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4032,
+    "name": "BYD Dubbo",
+    "state": "NSW",
+    "city": "Dubbo",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 18,
+    "name": "BYD Glendale",
+    "state": "NSW",
+    "city": "Glendale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 199,
+    "name": "BYD Gosford",
+    "state": "NSW",
+    "city": "West Gosford",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4319,
+    "name": "BYD Goulburn",
+    "state": "NSW",
+    "city": "Goulburn",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4115,
+    "name": "BYD Griffith",
+    "state": "NSW",
+    "city": "Griffith",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4047,
+    "name": "BYD Haberfield",
+    "state": "NSW",
+    "city": "Haberfield",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4299,
+    "name": "BYD Homebush",
+    "state": "NSW",
+    "city": "Homebush",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4308,
+    "name": "BYD Hornsby",
+    "state": "NSW",
+    "city": "Waitara",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 112,
+    "name": "BYD Liverpool",
+    "state": "NSW",
+    "city": "Liverpool",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 178,
+    "name": "BYD Maitland",
+    "state": "NSW",
+    "city": "East Maitland",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4118,
+    "name": "BYD Moruya",
+    "state": "NSW",
+    "city": "Moruya",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4362,
+    "name": "BYD Mudgee",
+    "state": "NSW",
+    "city": "Mudgee",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4345,
+    "name": "BYD Muswellbrook",
+    "state": "NSW",
+    "city": "Muswellbrook",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4310,
+    "name": "BYD Narellan",
+    "state": "NSW",
+    "city": "Gregory Hills",
+    "badge": "Pop-up Experience"
+   },
+   {
+    "id": 4015,
+    "name": "BYD Newcastle City",
+    "state": "NSW",
+    "city": "Maryville",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4097,
+    "name": "BYD Nowra",
+    "state": "NSW",
+    "city": "Bomaderry",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4017,
+    "name": "BYD Orange",
+    "state": "NSW",
+    "city": "Orange",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 200,
+    "name": "BYD Parramatta",
+    "state": "NSW",
+    "city": "Granville",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 201,
+    "name": "BYD Penrith",
+    "state": "NSW",
+    "city": "Kingswood",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 283,
+    "name": "BYD Port Macquarie",
+    "state": "NSW",
+    "city": "Port Macquarie",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4305,
+    "name": "BYD Rockdale",
+    "state": "NSW",
+    "city": "Rockdale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4379,
+    "name": "BYD Ryde",
+    "state": "NSW",
+    "city": "West Ryde",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4351,
+    "name": "BYD Singleton",
+    "state": "NSW",
+    "city": "Singleton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4054,
+    "name": "BYD Southern Highlands",
+    "state": "NSW",
+    "city": "Moss Vale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 16,
+    "name": "BYD Sutherland",
+    "state": "NSW",
+    "city": "Sutherland",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 335,
+    "name": "BYD Tamworth",
+    "state": "NSW",
+    "city": "Tamworth",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4320,
+    "name": "BYD Taree",
+    "state": "NSW",
+    "city": "Taree",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 209,
+    "name": "BYD Tuggerah",
+    "state": "NSW",
+    "city": "Tuggerah",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4124,
+    "name": "BYD Wagga Wagga",
+    "state": "NSW",
+    "city": "East Wagga Wagga",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4122,
+    "name": "BYD Windsor",
+    "state": "NSW",
+    "city": "Windsor",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4048,
+    "name": "BYD Wollongong",
+    "state": "NSW",
+    "city": "Wollongong",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 337,
+    "name": "BYD Ballarat",
+    "state": "VIC",
+    "city": "Ballarat Central",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 285,
+    "name": "BYD Bendigo",
+    "state": "VIC",
+    "city": "Epsom",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4394,
+    "name": "BYD Berwick",
+    "state": "VIC",
+    "city": "Berwick",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4307,
+    "name": "BYD Box Hill",
+    "state": "VIC",
+    "city": "Box Hill",
+    "badge": "Pop-up Experience"
+   },
+   {
+    "id": 122,
+    "name": "BYD Brighton",
+    "state": "VIC",
+    "city": "Bentleigh",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 17,
+    "name": "BYD Brooklyn",
+    "state": "VIC",
+    "city": "Brooklyn",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4050,
+    "name": "BYD Caroline Springs",
+    "state": "VIC",
+    "city": "Ravenhall",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 89,
+    "name": "BYD Chadstone",
+    "state": "VIC",
+    "city": "Malvern East",
+    "badge": "Pop-up Experience"
+   },
+   {
+    "id": 4132,
+    "name": "BYD Cranbourne",
+    "state": "VIC",
+    "city": "Cranbourne West",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 5,
+    "name": "BYD Dandenong",
+    "state": "VIC",
+    "city": "Dandenong",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4090,
+    "name": "BYD Doncaster",
+    "state": "VIC",
+    "city": "Doncaster East",
+    "badge": "Coming Soon"
+   },
+   {
+    "id": 278,
+    "name": "BYD Essendon",
+    "state": "VIC",
+    "city": "Essendon Fields",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4296,
+    "name": "BYD Fairfield",
+    "state": "VIC",
+    "city": "Fairfield",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4375,
+    "name": "BYD Ferntree Gully",
+    "state": "VIC",
+    "city": "Ferntree Gully",
+    "badge": "Coming Soon"
+   },
+   {
+    "id": 4311,
+    "name": "BYD Frankston",
+    "state": "VIC",
+    "city": "Frankston",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 336,
+    "name": "BYD Geelong",
+    "state": "VIC",
+    "city": "Belmont",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4460,
+    "name": "BYD Kilmore",
+    "state": "VIC",
+    "city": "Kilmore",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4347,
+    "name": "BYD Lilydale",
+    "state": "VIC",
+    "city": "Lilydale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4044,
+    "name": "BYD Melbourne City",
+    "state": "VIC",
+    "city": "Melbourne",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4119,
+    "name": "BYD Mildura",
+    "state": "VIC",
+    "city": "Mildura",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 367,
+    "name": "BYD Mornington",
+    "state": "VIC",
+    "city": "Mornington",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4301,
+    "name": "BYD Nunawading",
+    "state": "VIC",
+    "city": "Nunawading",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4316,
+    "name": "BYD Pakenham",
+    "state": "VIC",
+    "city": "Pakenham",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4056,
+    "name": "BYD Port Melbourne",
+    "state": "VIC",
+    "city": "Port Melbourne",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 182,
+    "name": "BYD Richmond",
+    "state": "VIC",
+    "city": "Cremorne",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4042,
+    "name": "BYD Ringwood",
+    "state": "VIC",
+    "city": "Ringwood",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4357,
+    "name": "BYD Seymour",
+    "state": "VIC",
+    "city": "Seymour",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 342,
+    "name": "BYD Shepparton",
+    "state": "VIC",
+    "city": "Shepparton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 378,
+    "name": "BYD South Morang",
+    "state": "VIC",
+    "city": "Mill Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4346,
+    "name": "BYD Sunbury",
+    "state": "VIC",
+    "city": "Sunbury",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4300,
+    "name": "BYD Traralgon",
+    "state": "VIC",
+    "city": "Traralgon",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4356,
+    "name": "BYD Warragul",
+    "state": "VIC",
+    "city": "Warragul",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4020,
+    "name": "BYD Warrnambool",
+    "state": "VIC",
+    "city": "Warrnambool",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 275,
+    "name": "BYD Waverley",
+    "state": "VIC",
+    "city": "Mulgrave",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4013,
+    "name": "BYD Werribee",
+    "state": "VIC",
+    "city": "Hoppers Crossing",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4123,
+    "name": "BYD Wodonga",
+    "state": "VIC",
+    "city": "Wodonga",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 208,
+    "name": "BYD Aspley",
+    "state": "QLD",
+    "city": "Aspley",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 142,
+    "name": "BYD Brisbane",
+    "state": "QLD",
+    "city": "Newstead",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4156,
+    "name": "BYD Bundaberg",
+    "state": "QLD",
+    "city": "Bundaberg West",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4117,
+    "name": "BYD Burleigh Heads",
+    "state": "QLD",
+    "city": "Burleigh Heads",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 148,
+    "name": "BYD Cairns",
+    "state": "QLD",
+    "city": "Cairns",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4371,
+    "name": "BYD Capalaba",
+    "state": "QLD",
+    "city": "Capalaba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4349,
+    "name": "BYD Dalby",
+    "state": "QLD",
+    "city": "Dalby",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4114,
+    "name": "BYD Gladstone",
+    "state": "QLD",
+    "city": "Gladstone",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 274,
+    "name": "BYD Gold Coast",
+    "state": "QLD",
+    "city": "Bundall",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4157,
+    "name": "BYD Hervey Bay",
+    "state": "QLD",
+    "city": "Pialba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 3,
+    "name": "BYD Indooroopilly",
+    "state": "QLD",
+    "city": "Indooroopilly",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4037,
+    "name": "BYD Ipswich",
+    "state": "QLD",
+    "city": "Bundamba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4146,
+    "name": "BYD Mackay",
+    "state": "QLD",
+    "city": "Mackay",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4393,
+    "name": "BYD Mareeba",
+    "state": "QLD",
+    "city": "Mareeba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4373,
+    "name": "BYD Moorooka",
+    "state": "QLD",
+    "city": "Moorooka",
+    "badge": "Test Drive & Delivery Centre"
+   },
+   {
+    "id": 4068,
+    "name": "BYD Mount Gravatt",
+    "state": "QLD",
+    "city": "Mount Gravatt",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4309,
+    "name": "BYD Noosa",
+    "state": "QLD",
+    "city": "Noosaville",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 149,
+    "name": "BYD North Lakes",
+    "state": "QLD",
+    "city": "North Lakes",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4033,
+    "name": "BYD Rockhampton",
+    "state": "QLD",
+    "city": "Rockhampton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 184,
+    "name": "BYD Springwood",
+    "state": "QLD",
+    "city": "Rochedale South",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 151,
+    "name": "BYD Sunshine Coast",
+    "state": "QLD",
+    "city": "Maroochydore",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 147,
+    "name": "BYD Toowoomba",
+    "state": "QLD",
+    "city": "Toowoomba",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 145,
+    "name": "BYD Townsville",
+    "state": "QLD",
+    "city": "Townsville",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4038,
+    "name": "BYD Albany",
+    "state": "WA",
+    "city": "Albany",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4027,
+    "name": "BYD Bunbury",
+    "state": "WA",
+    "city": "Bunbury",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 156,
+    "name": "BYD Cannington",
+    "state": "WA",
+    "city": "Cannington",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4028,
+    "name": "BYD Fremantle",
+    "state": "WA",
+    "city": "Fremantle",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4045,
+    "name": "BYD Geraldton",
+    "state": "WA",
+    "city": "Beresford",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4145,
+    "name": "BYD Mandurah",
+    "state": "WA",
+    "city": "Dudley Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4026,
+    "name": "BYD Midland",
+    "state": "WA",
+    "city": "Midland",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 144,
+    "name": "BYD Osborne Park",
+    "state": "WA",
+    "city": "Osborne Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4374,
+    "name": "BYD Rockingham",
+    "state": "WA",
+    "city": "Rockingham",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4043,
+    "name": "BYD Wangara",
+    "state": "WA",
+    "city": "Wangara",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 8,
+    "name": "BYD West Perth",
+    "state": "WA",
+    "city": "West Perth",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4348,
+    "name": "BYD Barossa",
+    "state": "SA",
+    "city": "Nuriootpa",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 163,
+    "name": "BYD Fullarton",
+    "state": "SA",
+    "city": "Fullarton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 7,
+    "name": "BYD Medindie",
+    "state": "SA",
+    "city": "Medindie",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 377,
+    "name": "BYD Mt Gambier",
+    "state": "SA",
+    "city": "Mt Gambier",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4030,
+    "name": "BYD Murray Bridge",
+    "state": "SA",
+    "city": "Murray Bridge",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4454,
+    "name": "BYD Port Augusta",
+    "state": "SA",
+    "city": "Port Augusta",
+    "badge": "Coming Soon"
+   },
+   {
+    "id": 4018,
+    "name": "BYD Reynella",
+    "state": "SA",
+    "city": "Morphett Vale",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4129,
+    "name": "BYD Riverland",
+    "state": "SA",
+    "city": "Loxton",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4019,
+    "name": "BYD Salisbury",
+    "state": "SA",
+    "city": "Salisbury Park",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 330,
+    "name": "BYD St Marys",
+    "state": "SA",
+    "city": "St Marys",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4380,
+    "name": "BYD Victor Harbor",
+    "state": "SA",
+    "city": "Victor Harbor",
+    "badge": "Coming Soon"
+   },
+   {
+    "id": 4055,
+    "name": "BYD Devonport",
+    "state": "TAS",
+    "city": "Devonport",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 6,
+    "name": "BYD Hobart",
+    "state": "TAS",
+    "city": "Hobart",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4021,
+    "name": "BYD Launceston",
+    "state": "TAS",
+    "city": "Launceston",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 152,
+    "name": "BYD Canberra",
+    "state": "ACT",
+    "city": "Belconnen",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4014,
+    "name": "BYD Phillip",
+    "state": "ACT",
+    "city": "Phillip",
+    "badge": "Experience Centre"
+   },
+   {
+    "id": 4016,
+    "name": "BYD Darwin",
+    "state": "NT",
+    "city": "Stuart Park",
+    "badge": "Experience Centre"
+   }
+  ],
   "renamed": [],
   "status": []
  }
