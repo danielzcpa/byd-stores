@@ -91,7 +91,7 @@
  },
  {
   "date": "2026-10-16",
-  "fetched_at_utc": "2026-10-16T06:19:25Z",
+  "fetched_at_utc": "2026-10-16T11:51:46Z",
   "count": 122,
   "count_all": 132,
   "by_state": {
@@ -114,22 +114,7 @@
    "ACT": 2,
    "NT": 1
   },
-  "added": [
-   {
-    "id": "4468",
-    "name": "BYD Broken Hill",
-    "state": "NSW",
-    "city": "Broken Hill",
-    "badge": "Coming Soon"
-   },
-   {
-    "id": "4467",
-    "name": "BYD Gympie",
-    "state": "QLD",
-    "city": "Gympie",
-    "badge": "Coming Soon"
-   }
-  ],
+  "added": [],
   "removed": [],
   "renamed": [],
   "status": []
