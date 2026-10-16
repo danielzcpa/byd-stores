@@ -1,9 +1,9 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-10-16T01:14:27Z",
- "fetched_at_aest": "2026-10-16 12:14 AEDT",
+ "fetched_at_utc": "2026-10-16T06:19:25Z",
+ "fetched_at_aest": "2026-10-16 17:19 AEDT",
  "count": 122,
- "count_all": 130,
+ "count_all": 132,
  "by_state": {
   "NSW": 42,
   "VIC": 32,
@@ -15,9 +15,9 @@
   "NT": 1
  },
  "by_state_all": {
-  "NSW": 43,
+  "NSW": 44,
   "VIC": 36,
-  "QLD": 23,
+  "QLD": 24,
   "WA": 11,
   "SA": 11,
   "TAS": 3,
@@ -26,13 +26,13 @@
  },
  "by_badge": {
   "Experience Centre": 122,
+  "Coming Soon": 6,
   "Pop-up Experience": 3,
-  "Coming Soon": 4,
   "Test Drive & Delivery Centre": 1
  },
  "all_pin_types": {
   "repairer": 19,
-  "pickup": 130,
+  "pickup": 132,
   "service": 103,
   "warranty": 103
  },
@@ -114,6 +114,19 @@
    "website": "https://evdealergroup-byd.com.au",
    "lat": -33.774815375151,
    "lng": 150.91852631515
+  },
+  {
+   "id": "4468",
+   "name": "BYD Broken Hill",
+   "badge": "Coming Soon",
+   "address": "Galena St &amp;, Rakow St, Broken Hill NSW 2880",
+   "city": "Broken Hill",
+   "state": "NSW",
+   "postcode": "2880",
+   "phone": "",
+   "website": "",
+   "lat": -31.959166805239,
+   "lng": 141.44275472511
   },
   {
    "id": "282",
@@ -773,7 +786,7 @@
    "city": "Ferntree Gully",
    "state": "VIC",
    "postcode": "3156",
-   "phone": "03 880 81621",
+   "phone": "03 8808 1688",
    "website": "",
    "lat": -37.883977,
    "lng": 145.269383
@@ -1180,6 +1193,19 @@
    "website": "https://evdealergroup-byd.com.au",
    "lat": -28.007198167613,
    "lng": 153.41222208531
+  },
+  {
+   "id": "4467",
+   "name": "BYD Gympie",
+   "badge": "Coming Soon",
+   "address": "4 Hall Rd, Glanmire",
+   "city": "Gympie",
+   "state": "QLD",
+   "postcode": "4570",
+   "phone": "07 4085 8888",
+   "website": "https://bydgympie.com.au",
+   "lat": -26.223621759145,
+   "lng": 152.69195303707
   },
   {
    "id": "4157",
