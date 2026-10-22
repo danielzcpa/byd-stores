@@ -271,12 +271,12 @@
  },
  {
   "date": "2026-10-22",
-  "fetched_at_utc": "2026-10-22T00:37:58Z",
-  "count": 122,
+  "fetched_at_utc": "2026-10-22T06:03:09Z",
+  "count": 123,
   "count_all": 132,
   "by_state": {
    "NSW": 42,
-   "VIC": 32,
+   "VIC": 33,
    "QLD": 22,
    "WA": 11,
    "SA": 9,
@@ -297,6 +297,21 @@
   "added": [],
   "removed": [],
   "renamed": [],
-  "status": []
+  "status": [
+   {
+    "id": "4310",
+    "name": "BYD Narellan",
+    "state": "NSW",
+    "from": "Pop-up Experience",
+    "to": "Coming Soon"
+   },
+   {
+    "id": "4375",
+    "name": "BYD Ferntree Gully",
+    "state": "VIC",
+    "from": "Coming Soon",
+    "to": "Experience Centre"
+   }
+  ]
  }
 ]

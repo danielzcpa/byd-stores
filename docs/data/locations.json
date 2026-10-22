@@ -1,12 +1,12 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-10-22T00:37:58Z",
- "fetched_at_aest": "2026-10-22 11:37 AEDT",
- "count": 122,
+ "fetched_at_utc": "2026-10-22T06:03:09Z",
+ "fetched_at_aest": "2026-10-22 17:03 AEDT",
+ "count": 123,
  "count_all": 132,
  "by_state": {
   "NSW": 42,
-  "VIC": 32,
+  "VIC": 33,
   "QLD": 22,
   "WA": 11,
   "SA": 9,
@@ -25,9 +25,9 @@
   "NT": 1
  },
  "by_badge": {
-  "Experience Centre": 122,
+  "Experience Centre": 123,
   "Coming Soon": 6,
-  "Pop-up Experience": 3,
+  "Pop-up Experience": 2,
   "Test Drive & Delivery Centre": 1
  },
  "all_pin_types": {
@@ -378,15 +378,15 @@
   {
    "id": "4310",
    "name": "BYD Narellan",
-   "badge": "Pop-up Experience",
-   "address": "Narellan Town Centre &lt;br&gt; 326 Camden Valley Way",
+   "badge": "Coming Soon",
+   "address": "9 Cattle Way",
    "city": "Gregory Hills",
    "state": "NSW",
-   "postcode": "2567",
-   "phone": "0282718888",
+   "postcode": "2557",
+   "phone": "02 89668888",
    "website": "https://bydcampbelltown.com.au",
-   "lat": -34.023649,
-   "lng": 150.758601
+   "lat": -34.026867102232,
+   "lng": 150.75654971864
   },
   {
    "id": "4015",
@@ -781,7 +781,7 @@
   {
    "id": "4375",
    "name": "BYD Ferntree Gully",
-   "badge": "Coming Soon",
+   "badge": "Experience Centre",
    "address": "UNIT 1 / 1821 Ferntree Gully Road",
    "city": "Ferntree Gully",
    "state": "VIC",
