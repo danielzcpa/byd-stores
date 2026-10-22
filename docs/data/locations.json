@@ -1,7 +1,7 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-10-22T06:03:09Z",
- "fetched_at_aest": "2026-10-22 17:03 AEDT",
+ "fetched_at_utc": "2026-10-22T11:42:25Z",
+ "fetched_at_aest": "2026-10-22 22:42 AEDT",
  "count": 123,
  "count_all": 132,
  "by_state": {
@@ -787,7 +787,7 @@
    "state": "VIC",
    "postcode": "3156",
    "phone": "03 8808 1688",
-   "website": "",
+   "website": "https://bydferntreegully.com.au",
    "lat": -37.883977,
    "lng": 145.269383
   },
