@@ -1,11 +1,11 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-10-30T08:31:44Z",
- "fetched_at_aest": "2026-10-30 19:31 AEDT",
- "count": 123,
+ "fetched_at_utc": "2026-10-30T15:18:01Z",
+ "fetched_at_aest": "2026-10-31 02:18 AEDT",
+ "count": 124,
  "count_all": 132,
  "by_state": {
-  "NSW": 42,
+  "NSW": 43,
   "VIC": 33,
   "QLD": 22,
   "WA": 11,
@@ -25,8 +25,8 @@
   "NT": 1
  },
  "by_badge": {
-  "Experience Centre": 123,
-  "Coming Soon": 6,
+  "Experience Centre": 124,
+  "Coming Soon": 5,
   "Pop-up Experience": 2,
   "Test Drive & Delivery Centre": 1
  },
@@ -378,7 +378,7 @@
   {
    "id": "4310",
    "name": "BYD Narellan",
-   "badge": "Coming Soon",
+   "badge": "Experience Centre",
    "address": "9 Cattle Way",
    "city": "Gregory Hills",
    "state": "NSW",
