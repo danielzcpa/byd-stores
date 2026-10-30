@@ -541,7 +541,7 @@
  },
  {
   "date": "2026-10-31",
-  "fetched_at_utc": "2026-10-30T15:18:01Z",
+  "fetched_at_utc": "2026-10-30T20:05:18Z",
   "count": 124,
   "count_all": 132,
   "by_state": {
@@ -567,14 +567,6 @@
   "added": [],
   "removed": [],
   "renamed": [],
-  "status": [
-   {
-    "id": "4310",
-    "name": "BYD Narellan",
-    "state": "NSW",
-    "from": "Coming Soon",
-    "to": "Experience Centre"
-   }
-  ]
+  "status": []
  }
 ]
