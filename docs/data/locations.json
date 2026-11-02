@@ -1,7 +1,7 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-02T01:46:08Z",
- "fetched_at_aest": "2026-11-02 12:46 AEDT",
+ "fetched_at_utc": "2026-11-02T09:20:57Z",
+ "fetched_at_aest": "2026-11-02 20:20 AEDT",
  "count": 124,
  "count_all": 132,
  "by_state": {
@@ -1113,8 +1113,8 @@
    "postcode": "4670",
    "phone": "07 4158 9589",
    "website": "https://evdealergroup-byd.com.au",
-   "lat": -24.872725789002,
-   "lng": 152.3333184682
+   "lat": -24.873067848936,
+   "lng": 152.33330663072
   },
   {
    "id": "4117",
