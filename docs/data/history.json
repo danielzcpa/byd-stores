@@ -661,7 +661,7 @@
  },
  {
   "date": "2026-11-04",
-  "fetched_at_utc": "2026-11-04T03:11:13Z",
+  "fetched_at_utc": "2026-11-04T11:30:17Z",
   "count": 124,
   "count_all": 133,
   "by_state": {
@@ -684,15 +684,7 @@
    "ACT": 2,
    "NT": 1
   },
-  "added": [
-   {
-    "id": "4580",
-    "name": "BYD Melton",
-    "state": "VIC",
-    "city": "Melton West",
-    "badge": "Pop-up Experience"
-   }
-  ],
+  "added": [],
   "removed": [],
   "renamed": [],
   "status": []
