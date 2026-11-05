@@ -691,15 +691,15 @@
  },
  {
   "date": "2026-11-05",
-  "fetched_at_utc": "2026-11-05T00:19:46Z",
-  "count": 124,
+  "fetched_at_utc": "2026-11-05T07:19:56Z",
+  "count": 126,
   "count_all": 133,
   "by_state": {
    "NSW": 43,
    "VIC": 33,
    "QLD": 22,
    "WA": 11,
-   "SA": 9,
+   "SA": 11,
    "TAS": 3,
    "ACT": 2,
    "NT": 1
@@ -717,6 +717,21 @@
   "added": [],
   "removed": [],
   "renamed": [],
-  "status": []
+  "status": [
+   {
+    "id": "4454",
+    "name": "BYD Port Augusta",
+    "state": "SA",
+    "from": "Coming Soon",
+    "to": "Experience Centre"
+   },
+   {
+    "id": "4380",
+    "name": "BYD Victor Harbor",
+    "state": "SA",
+    "from": "Coming Soon",
+    "to": "Experience Centre"
+   }
+  ]
  }
 ]

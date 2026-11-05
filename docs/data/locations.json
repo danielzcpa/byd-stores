@@ -1,15 +1,15 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-05T00:19:46Z",
- "fetched_at_aest": "2026-11-05 11:19 AEDT",
- "count": 124,
+ "fetched_at_utc": "2026-11-05T07:19:56Z",
+ "fetched_at_aest": "2026-11-05 18:19 AEDT",
+ "count": 126,
  "count_all": 133,
  "by_state": {
   "NSW": 43,
   "VIC": 33,
   "QLD": 22,
   "WA": 11,
-  "SA": 9,
+  "SA": 11,
   "TAS": 3,
   "ACT": 2,
   "NT": 1
@@ -25,8 +25,8 @@
   "NT": 1
  },
  "by_badge": {
-  "Experience Centre": 124,
-  "Coming Soon": 5,
+  "Experience Centre": 126,
+  "Coming Soon": 3,
   "Pop-up Experience": 3,
   "Test Drive & Delivery Centre": 1
  },
@@ -1613,13 +1613,13 @@
   {
    "id": "4454",
    "name": "BYD Port Augusta",
-   "badge": "Coming Soon",
+   "badge": "Experience Centre",
    "address": "2 Caroona Rd",
    "city": "Port Augusta",
    "state": "SA",
    "postcode": "5700",
    "phone": "",
-   "website": "",
+   "website": "https://evdealergroup-byd.com.au",
    "lat": -32.483902060748,
    "lng": 137.75736017438
   },
@@ -1678,13 +1678,13 @@
   {
    "id": "4380",
    "name": "BYD Victor Harbor",
-   "badge": "Coming Soon",
+   "badge": "Experience Centre",
    "address": "5 Victoria St",
    "city": "Victor Harbor",
    "state": "SA",
    "postcode": "5211",
    "phone": "",
-   "website": "",
+   "website": "https://evdealergroup-byd.com.au",
    "lat": -35.555415143992,
    "lng": 138.62168167702
   },
