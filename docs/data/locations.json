@@ -1,7 +1,7 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-05T21:56:11Z",
- "fetched_at_aest": "2026-11-06 08:56 AEDT",
+ "fetched_at_utc": "2026-11-06T02:18:41Z",
+ "fetched_at_aest": "2026-11-06 13:18 AEDT",
  "count": 126,
  "count_all": 133,
  "by_state": {
@@ -384,7 +384,7 @@
    "state": "NSW",
    "postcode": "2557",
    "phone": "02 89668888",
-   "website": "https://bydcampbelltown.com.au",
+   "website": "https://bydnarellan.com.au",
    "lat": -34.026867102232,
    "lng": 150.75654971864
   },
