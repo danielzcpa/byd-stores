@@ -1,7 +1,7 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-09T01:55:45Z",
- "fetched_at_aest": "2026-11-09 12:55 AEDT",
+ "fetched_at_utc": "2026-11-09T09:39:23Z",
+ "fetched_at_aest": "2026-11-09 20:39 AEDT",
  "count": 126,
  "count_all": 133,
  "by_state": {
@@ -33,8 +33,8 @@
  "all_pin_types": {
   "repairer": 19,
   "pickup": 133,
-  "service": 107,
-  "warranty": 107
+  "service": 108,
+  "warranty": 108
  },
  "locations": [
   {
