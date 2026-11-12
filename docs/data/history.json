@@ -943,5 +943,35 @@
   "removed": [],
   "renamed": [],
   "status": []
+ },
+ {
+  "date": "2026-11-13",
+  "fetched_at_utc": "2026-11-12T19:50:22Z",
+  "count": 126,
+  "count_all": 133,
+  "by_state": {
+   "NSW": 43,
+   "VIC": 33,
+   "QLD": 22,
+   "WA": 11,
+   "SA": 11,
+   "TAS": 3,
+   "ACT": 2,
+   "NT": 1
+  },
+  "by_state_all": {
+   "NSW": 44,
+   "VIC": 37,
+   "QLD": 24,
+   "WA": 11,
+   "SA": 11,
+   "TAS": 3,
+   "ACT": 2,
+   "NT": 1
+  },
+  "added": [],
+  "removed": [],
+  "renamed": [],
+  "status": []
  }
 ]
