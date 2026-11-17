@@ -1,7 +1,7 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-17T02:02:22Z",
- "fetched_at_aest": "2026-11-17 13:02 AEDT",
+ "fetched_at_utc": "2026-11-17T10:36:39Z",
+ "fetched_at_aest": "2026-11-17 21:36 AEDT",
  "count": 126,
  "count_all": 133,
  "by_state": {
@@ -1572,19 +1572,6 @@
    "lng": 138.63509284463
   },
   {
-   "id": "7",
-   "name": "BYD Medindie",
-   "badge": "Experience Centre",
-   "address": "17 Main North Road",
-   "city": "Medindie",
-   "state": "SA",
-   "postcode": "5081",
-   "phone": "1300 293 288",
-   "website": "https://evdealergroup-byd.com.au",
-   "lat": -34.8968928,
-   "lng": 138.5998061
-  },
-  {
    "id": "377",
    "name": "BYD Mt Gambier",
    "badge": "Experience Centre",
@@ -1609,6 +1596,19 @@
    "website": "https://evdealergroup-byd.com.au",
    "lat": -35.121638908473,
    "lng": 139.26929235037
+  },
+  {
+   "id": "7",
+   "name": "BYD Nailsworth",
+   "badge": "Experience Centre",
+   "address": "75 Main North Road",
+   "city": "Nailsworth",
+   "state": "SA",
+   "postcode": "5083",
+   "phone": "1300 293 288",
+   "website": "https://evdealergroup-byd.com.au",
+   "lat": -34.890799,
+   "lng": 138.603651
   },
   {
    "id": "4454",
