@@ -1,7 +1,7 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-22T21:42:54Z",
- "fetched_at_aest": "2026-11-23 08:42 AEDT",
+ "fetched_at_utc": "2026-11-23T02:35:52Z",
+ "fetched_at_aest": "2026-11-23 13:35 AEDT",
  "count": 126,
  "count_all": 133,
  "by_state": {
@@ -1146,7 +1146,7 @@
    "id": "148",
    "name": "BYD Cairns",
    "badge": "Experience Centre",
-   "address": "221 Mulgrave Road",
+   "address": "227 Mulgrave Road",
    "city": "Cairns",
    "state": "QLD",
    "postcode": "4870",
