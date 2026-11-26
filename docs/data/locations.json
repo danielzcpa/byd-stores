@@ -1,7 +1,7 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-25T22:26:57Z",
- "fetched_at_aest": "2026-11-26 09:26 AEDT",
+ "fetched_at_utc": "2026-11-26T04:20:04Z",
+ "fetched_at_aest": "2026-11-26 15:20 AEDT",
  "count": 126,
  "count_all": 133,
  "by_state": {
@@ -1618,7 +1618,7 @@
    "city": "Port Augusta",
    "state": "SA",
    "postcode": "5700",
-   "phone": "",
+   "phone": "08 8642 3066",
    "website": "https://evdealergroup-byd.com.au",
    "lat": -32.483902060748,
    "lng": 137.75736017438
@@ -1683,7 +1683,7 @@
    "city": "Victor Harbor",
    "state": "SA",
    "postcode": "5211",
-   "phone": "",
+   "phone": "08 8552 7033",
    "website": "https://evdealergroup-byd.com.au",
    "lat": -35.555415143992,
    "lng": 138.62168167702
