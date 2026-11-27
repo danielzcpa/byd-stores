@@ -1,7 +1,7 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-26T23:15:11Z",
- "fetched_at_aest": "2026-11-27 10:15 AEDT",
+ "fetched_at_utc": "2026-11-27T05:18:34Z",
+ "fetched_at_aest": "2026-11-27 16:18 AEDT",
  "count": 126,
  "count_all": 133,
  "by_state": {
@@ -123,7 +123,7 @@
    "city": "Broken Hill",
    "state": "NSW",
    "postcode": "2880",
-   "phone": "",
+   "phone": "08 8087 2463",
    "website": "",
    "lat": -31.959166805239,
    "lng": 141.44275472511
