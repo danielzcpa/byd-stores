@@ -1402,7 +1402,7 @@
  },
  {
   "date": "2026-11-28",
-  "fetched_at_utc": "2026-11-27T15:31:41Z",
+  "fetched_at_utc": "2026-11-27T23:42:08Z",
   "count": 127,
   "count_all": 133,
   "by_state": {
@@ -1428,14 +1428,6 @@
   "added": [],
   "removed": [],
   "renamed": [],
-  "status": [
-   {
-    "id": "4468",
-    "name": "BYD Broken Hill",
-    "state": "NSW",
-    "from": "Coming Soon",
-    "to": "Experience Centre"
-   }
-  ]
+  "status": []
  }
 ]
