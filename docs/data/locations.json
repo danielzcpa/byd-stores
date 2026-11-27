@@ -1,11 +1,11 @@
 {
  "source": "https://bydautomotive.com.au/find-us",
- "fetched_at_utc": "2026-11-27T05:18:34Z",
- "fetched_at_aest": "2026-11-27 16:18 AEDT",
- "count": 126,
+ "fetched_at_utc": "2026-11-27T15:31:41Z",
+ "fetched_at_aest": "2026-11-28 02:31 AEDT",
+ "count": 127,
  "count_all": 133,
  "by_state": {
-  "NSW": 43,
+  "NSW": 44,
   "VIC": 33,
   "QLD": 22,
   "WA": 11,
@@ -25,9 +25,9 @@
   "NT": 1
  },
  "by_badge": {
-  "Experience Centre": 126,
-  "Coming Soon": 3,
+  "Experience Centre": 127,
   "Pop-up Experience": 3,
+  "Coming Soon": 2,
   "Test Drive & Delivery Centre": 1
  },
  "all_pin_types": {
@@ -118,7 +118,7 @@
   {
    "id": "4468",
    "name": "BYD Broken Hill",
-   "badge": "Coming Soon",
+   "badge": "Experience Centre",
    "address": "Galena St &amp;, Rakow St, Broken Hill NSW 2880",
    "city": "Broken Hill",
    "state": "NSW",
